@@ -11,7 +11,7 @@ describe('node generator', function () {
         return done(err);
       }
 
-      this.app = helpers.createGenerator('node:app', [
+      this.app = helpers.createGenerator('node-gulp:app', [
         '../../app'
       ]);
       this.app.options['skip-install'] = true;
@@ -25,8 +25,9 @@ describe('node generator', function () {
       'test/mymodule_test.js',
       '.gitignore',
       '.jshintrc',
+      '.jscs.json',
       '.travis.yml',
-      'Gruntfile.js',
+      'gulpfile.js',
       ['package.json', /"name": "mymodule"/],
       'README.md',
     ];

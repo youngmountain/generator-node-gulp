@@ -1,19 +1,13 @@
-# Node Generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-node.png?branch=master)](https://travis-ci.org/yeoman/generator-node)
+# Node Generator [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
-> Create a node.js module with [Yeoman][], including nodeunit unit tests.
+> Create a node.js module with [Yeoman][http://yeoman.io/], including nodeunit unit tests.
 
 This generator is based of
-[grunt-init-node](https://github.com/gruntjs/grunt-init-node), authored by the
-magnificient GruntJS team.
-
-Maintained by Kyle Robinson Young, Addy Osmani and Stephen Sawchuck.
-
-[Yeoman]: http://yeoman.io/
-
+[generator-node](https://github.com/yeoman/generator-node)
 
 ## Installation
 
-Install the generator by running: `npm install -g generator-node`.
+Install the generator by running: `npm install -g generator-node-gulp`.
 
 
 ## Usage
@@ -21,7 +15,7 @@ Install the generator by running: `npm install -g generator-node`.
 At the command-line, cd into an empty directory, run this command and follow the prompts.
 
 ```
-yo node
+yo node-gulp
 ```
 
 _Note that this template will generate files in the current directory, so be sure to change to a new directory first if you don't want to overwrite existing files._
@@ -30,3 +24,10 @@ _Note that this template will generate files in the current directory, so be sur
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+[npm-url]: https://npmjs.org/package/generator-node-gulp
+[npm-image]: https://badge.fury.io/js/generator-node-gulp.png
+[travis-url]: https://travis-ci.org/stefanbuck/generator-node-gulp
+[travis-image]: https://travis-ci.org/stefanbuck/generator-node-gulp.png?branch=master
+[daviddm-url]: https://david-dm.org/stefanbuck/generator-node-gulp.png?theme=shields.io
+[daviddm-image]: https://david-dm.org/stefanbuck/generator-node-gulp
