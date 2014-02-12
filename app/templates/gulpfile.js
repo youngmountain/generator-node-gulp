@@ -8,7 +8,7 @@ var bump   = require('gulp-bump');
 
 var paths = {
   lint: ['./gulpfile.js', './lib/**/*.js'],
-  tests: './test/**/*.js',
+  tests: ['./test/**/*.js', '!test/{temp,temp/**}']
 };
 
 gulp.task('lint', function () {
