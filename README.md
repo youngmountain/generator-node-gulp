@@ -1,6 +1,6 @@
 # Node Generator [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
-> Create a node.js module with [Yeoman][http://yeoman.io/], including nodeunit unit tests.
+> Create a Node.js module with [Yeoman](http://yeoman.io/), including gulp and Mocha unit tests
 
 This generator is based of
 [generator-node](https://github.com/yeoman/generator-node)
