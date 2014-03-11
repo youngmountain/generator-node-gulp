@@ -95,6 +95,7 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('gitignore', '.gitignore');
   this.copy('travis.yml', '.travis.yml');
   this.copy('jscs.json', '.jscs.json');
+  this.copy('editorconfig', '.editorconfig');
 
   this.template('README.md');
   this.template('gulpfile.js');

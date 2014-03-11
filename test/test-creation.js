@@ -27,6 +27,7 @@ describe('node generator', function () {
       '.jshintrc',
       '.jscs.json',
       '.travis.yml',
+      '.editorconfig',
       'gulpfile.js',
       ['package.json', /"name": "mymodule"/],
       'README.md',
