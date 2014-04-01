@@ -26,7 +26,7 @@ NodeGenerator.prototype.askFor = function askFor() {
     '\nThe name of your project shouldn\'t contain "node" or "js" and' +
     '\nshould be a unique ID not already in use at search.npmjs.org.');
 
-  var prompts = [{
+  var promptsMetaInfos = [{
     name: 'name',
     message: 'Module Name',
     default: path.basename(process.cwd())
@@ -55,28 +55,50 @@ NodeGenerator.prototype.askFor = function askFor() {
     message: 'Author\'s Homepage'
   }];
 
+  var prompts = [{
+    type: 'checkbox',
+    name: 'modules',
+    message: 'Which modules would you like to include?',
+    choices: [{
+      value: 'jscsModule',
+      name: 'jscs (JavaScript Code Style checker)',
+      checked: true
+    }, {
+      value: 'releaseModule',
+      name: 'release (Bump npm versions with Gulp)',
+      checked: true
+    }]
+  }];
+
   this.currentYear = (new Date()).getFullYear();
 
   this.prompt(prompts, function (props) {
-    this.slugname = this._.slugify(props.name);
-    this.safeSlugname = this.slugname.replace(
-      /-([a-z])/g,
-      function (g) { return g[1].toUpperCase(); }
-    );
+    var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
 
-    if(!props.githubUsername){
-      this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
-    } else {
-      this.repoUrl = 'user/repo';
-    }
+    this.jscsModule = hasMod('jscsModule');
+    this.releaseModule = hasMod('releaseModule');
 
-    if (!props.homepage) {
-      props.homepage = this.repoUrl;
-    }
+    this.prompt(promptsMetaInfos, function (props) {
+      this.slugname = this._.slugify(props.name);
+      this.safeSlugname = this.slugname.replace(
+        /-([a-z])/g,
+        function (g) { return g[1].toUpperCase(); }
+      );
 
-    this.props = props;
+      if(!props.githubUsername){
+        this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
+      } else {
+        this.repoUrl = 'user/repo';
+      }
 
-    cb();
+      if (!props.homepage) {
+        props.homepage = this.repoUrl;
+      }
+
+      this.props = props;
+
+      cb();
+    }.bind(this));
   }.bind(this));
 };
 
@@ -94,8 +116,10 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('jshintrc', '.jshintrc');
   this.copy('gitignore', '.gitignore');
   this.copy('travis.yml', '.travis.yml');
-  this.copy('jscs.json', '.jscs.json');
   this.copy('editorconfig', '.editorconfig');
+  if(this.jscsModule) {
+    this.copy('jscs.json', '.jscs.json');
+  }
 
   this.template('README.md');
   this.template('gulpfile.js');

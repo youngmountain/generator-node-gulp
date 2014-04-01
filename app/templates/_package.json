@@ -1,14 +1,14 @@
 {
   "name": "<%= slugname %>",
-  "description": "<%= props.description %>",<% if (props.homepage) { %>
-  "version": "0.0.0",
+  "description": "<%= props.description %>",
+  "version": "0.0.0",<% if (props.homepage) { %>
   "homepage": "<%= props.homepage %>",<%}%>
   "bugs": "<%= repoUrl %>/issues",
   "license": "<%= props.license %>",
   "main": "lib/<%= slugname %>.js",
   "author": {
-    "name": "<%= props.authorName %>",
-    "email": "<%= props.authorEmail %>"<% if (props.authorUrl) { %>,
+    "name": "<%= props.authorName %>"<% if (props.authorEmail) { %>,
+    "email": "<%= props.authorEmail %>"<% } %><% if (props.authorUrl) { %>,
     "url": "<%= props.authorUrl %>"<% } %>
   },
   "repository": {
@@ -18,9 +18,9 @@
   "keywords":[],
   "dependencies": {},
   "devDependencies": {
-    "gulp": "~3.5.2",
-    "gulp-bump": "~0.1.4",
-    "gulp-jscs": "~0.3.0",
+    "gulp": "~3.5.2",<% if (releaseModule) { %>
+    "gulp-bump": "~0.1.4",<% } %><% if (jscsModule) { %>
+    "gulp-jscs": "~0.3.0",<% } %>
     "gulp-jshint": "~1.4.0",
     "gulp-mocha": "~0.4.1",
     "should": "~3.1.2",
