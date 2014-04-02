@@ -25,12 +25,11 @@ describe('node generator', function () {
       'test/mymodule_test.js',
       '.gitignore',
       '.jshintrc',
-      '.jscs.json',
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
       ['package.json', /"name": "mymodule"/],
-      'README.md',
+      'README.md'
     ];
 
     helpers.mockPrompt(this.app, {
@@ -39,7 +38,8 @@ describe('node generator', function () {
       'license': 'MIT',
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
-      'authorEmail': 'octo@example.com'
+      'authorEmail': 'octo@example.com',
+       modules: []
     });
 
     this.app.run({}, function () {
@@ -47,4 +47,64 @@ describe('node generator', function () {
       done();
     });
   });
+
+  it('generator with releaseModule', function (done) {
+    var expected = [
+      'lib/mymodule.js',
+      'test/mymodule_test.js',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.editorconfig',
+      'gulpfile.js',
+      ['package.json', /"name": "mymodule"/, /"gulp-bump"/],
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+       modules: ['releaseModule']
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
+  it('generator with jscsModule', function (done) {
+    var expected = [
+      'lib/mymodule.js',
+      'test/mymodule_test.js',
+      '.gitignore',
+      '.jshintrc',
+      '.jscs.json',
+      '.travis.yml',
+      '.editorconfig',
+      'gulpfile.js',
+      ['package.json', /"name": "mymodule"/, /"gulp-jscs"/],
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+       modules: ['jscsModule']
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
 });

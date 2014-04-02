@@ -26,7 +26,7 @@ NodeGenerator.prototype.askFor = function askFor() {
     '\nThe name of your project shouldn\'t contain "node" or "js" and' +
     '\nshould be a unique ID not already in use at search.npmjs.org.');
 
-  var promptsMetaInfos = [{
+  var prompts = [{
     name: 'name',
     message: 'Module Name',
     default: path.basename(process.cwd())
@@ -55,6 +55,35 @@ NodeGenerator.prototype.askFor = function askFor() {
     message: 'Author\'s Homepage'
   }];
 
+  this.currentYear = (new Date()).getFullYear();
+
+  this.prompt(prompts, function (props) {
+    this.slugname = this._.slugify(props.name);
+    this.safeSlugname = this.slugname.replace(
+      /-([a-z])/g,
+      function (g) { return g[1].toUpperCase(); }
+    );
+
+    if(!props.githubUsername){
+      this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
+    } else {
+      this.repoUrl = 'user/repo';
+    }
+
+    if (!props.homepage) {
+      props.homepage = this.repoUrl;
+    }
+
+    this.props = props;
+
+    cb();
+  }.bind(this));
+
+};
+
+NodeGenerator.prototype.askForModules = function askForModules() {
+  var cb = this.async();
+
   var prompts = [{
     type: 'checkbox',
     name: 'modules',
@@ -70,37 +99,15 @@ NodeGenerator.prototype.askFor = function askFor() {
     }]
   }];
 
-  this.currentYear = (new Date()).getFullYear();
-
   this.prompt(prompts, function (props) {
     var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
 
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
 
-    this.prompt(promptsMetaInfos, function (props) {
-      this.slugname = this._.slugify(props.name);
-      this.safeSlugname = this.slugname.replace(
-        /-([a-z])/g,
-        function (g) { return g[1].toUpperCase(); }
-      );
-
-      if(!props.githubUsername){
-        this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
-      } else {
-        this.repoUrl = 'user/repo';
-      }
-
-      if (!props.homepage) {
-        props.homepage = this.repoUrl;
-      }
-
-      this.props = props;
-
-      cb();
-    }.bind(this));
+    cb();
   }.bind(this));
-};
+}
 
 NodeGenerator.prototype.lib = function lib() {
   this.mkdir('lib');
