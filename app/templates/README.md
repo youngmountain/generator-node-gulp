@@ -2,28 +2,41 @@
 
 <%= props.description %>
 
-## Getting Started
-Install the module with: `npm install <%= slugname %>`
+
+## Install
+
+```bash
+$ npm install --save <%= slugname %>
+```
+
+
+## Usage
 
 ```javascript
 var <%= slugname %> = require('<%= slugname %>');
 <%= slugname %>.awesome(); // "awesome"
 ```
 
-## Documentation
+## API
+
 _(Coming soon)_
 
-## Examples
-_(Coming soon)_
 
 ## Contributing
+
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [gulp](http://gulpjs.com/).
 
+
 ## Release History
+
 _(Nothing yet)_
 
+
 ## License
+
 Copyright (c) <%= currentYear %> <%= props.authorName %>. Licensed under the <%= props.license %> license.
+
+
 
 [npm-url]: https://npmjs.org/package/<%= slugname %>
 [npm-image]: https://badge.fury.io/js/<%= slugname %>.png
