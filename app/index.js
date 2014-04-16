@@ -3,6 +3,7 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var util = require('util');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
@@ -96,6 +97,10 @@ NodeGenerator.prototype.askForModules = function askForModules() {
       value: 'releaseModule',
       name: 'release (Bump npm versions with Gulp)',
       checked: true
+    }, {
+      value: 'lodashModule',
+      name: 'loDash (A utility library delivering consistency, customization, performance, & extras)',
+      checked: true
     }]
   }];
 
@@ -104,6 +109,12 @@ NodeGenerator.prototype.askForModules = function askForModules() {
 
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
+
+    this.dependenciesList = {};
+
+    if (hasMod('lodashModule')) {
+      this.dependenciesList["lodash"] = "2.4.1";
+    }
 
     cb();
   }.bind(this));
@@ -123,6 +134,19 @@ NodeGenerator.prototype.example = function lib() {
   this.mkdir('example');
   this.template('example/simple.js', 'example/simple.js');
 };
+
+NodeGenerator.prototype.dependency = function projectfiles(done) {
+
+  this.dependencies = '';
+  for (var name in this.dependenciesList) {
+    var version = this.dependenciesList[name];
+    this.dependencies += util.format('\n    "%s": "%s",', name, version);
+  }
+  if(this.dependencies.length > 0) {
+    this.dependencies = this.dependencies.replace('\n', '');
+    this.dependencies = this.dependencies.substring(0, this.dependencies.length - 1);
+  }
+}
 
 NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('jshintrc', '.jshintrc');

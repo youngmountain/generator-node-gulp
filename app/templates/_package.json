@@ -16,7 +16,9 @@
     "url": "<%= repoUrl %>"
   },
   "keywords":[],
-  "dependencies": {},
+  "dependencies": {<% if (dependencies) { %>
+<%= dependencies %>
+  <% } %>},
   "devDependencies": {
     "gulp": "~3.5.2",<% if (releaseModule) { %>
     "gulp-bump": "~0.1.4",<% } %><% if (jscsModule) { %>

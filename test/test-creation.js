@@ -141,4 +141,33 @@ describe('node generator', function () {
     });
   });
 
+  it('generator with lodashModule', function (done) {
+    var expected = [
+      'lib/mymodule.js',
+      'test/mymodule_test.js',
+      'example/simple.js',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.editorconfig',
+      'gulpfile.js',
+      ['package.json', /"lodash"/],
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+      'modules': ['lodashModule']
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
 });
