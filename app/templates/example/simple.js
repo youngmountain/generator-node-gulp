@@ -12,6 +12,6 @@
 // External libs.
 // Internal libs.
 
-exports.awesome = function() {
-  return 'awesome';
-};
+var <%= slugname %> = require('<%= slugname %>');
+
+<%= slugname %>.awesome(); // "awesome"

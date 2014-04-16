@@ -26,8 +26,8 @@ _Note that this template will generate files in the current directory, so be sur
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 [npm-url]: https://npmjs.org/package/generator-node-gulp
-[npm-image]: https://badge.fury.io/js/generator-node-gulp.png
+[npm-image]: https://badge.fury.io/js/generator-node-gulp.svg
 [travis-url]: https://travis-ci.org/stefanbuck/generator-node-gulp
-[travis-image]: https://travis-ci.org/stefanbuck/generator-node-gulp.png?branch=master
-[daviddm-url]: https://david-dm.org/stefanbuck/generator-node-gulp.png?theme=shields.io
+[travis-image]: https://travis-ci.org/stefanbuck/generator-node-gulp.svg?branch=master
+[daviddm-url]: https://david-dm.org/stefanbuck/generator-node-gulp.svg?theme=shields.io
 [daviddm-image]: https://david-dm.org/stefanbuck/generator-node-gulp

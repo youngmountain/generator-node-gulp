@@ -39,8 +39,8 @@ Copyright (c) <%= currentYear %> <%= props.authorName %>. Licensed under the <%=
 
 
 [npm-url]: https://npmjs.org/package/<%= slugname %>
-[npm-image]: https://badge.fury.io/js/<%= slugname %>.png
+[npm-image]: https://badge.fury.io/js/<%= slugname %>.svg
 [travis-url]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>
-[travis-image]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>.png?branch=master
-[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.png?theme=shields.io
+[travis-image]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>.svg?branch=master
+[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.svg?theme=shields.io
 [daviddm-image]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>

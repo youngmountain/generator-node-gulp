@@ -21,8 +21,9 @@ describe('node generator', function () {
 
   it('creates expected files', function (done) {
     var expected = [
-      'lib/mymodule.js',
+      ['lib/mymodule.js', /https:\/\/github.com\/octocat\/mymodule/],
       'test/mymodule_test.js',
+      'example/simple.js',
       '.gitignore',
       '.jshintrc',
       '.travis.yml',
@@ -39,7 +40,38 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-       modules: []
+      'modules': []
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
+  it('creates expected files', function (done) {
+    var expected = [
+      ['lib/mymodule.js', /http:\/\/example.com/],
+      'test/mymodule_test.js',
+      'example/simple.js',
+      '.gitignore',
+      '.jshintrc',
+      '.travis.yml',
+      '.editorconfig',
+      'gulpfile.js',
+      ['package.json', /"name": "mymodule"/],
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+      'homepage': 'http://example.com',
+      'modules': []
     });
 
     this.app.run({}, function () {
@@ -52,6 +84,7 @@ describe('node generator', function () {
     var expected = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
+      'example/simple.js',
       '.gitignore',
       '.jshintrc',
       '.travis.yml',
@@ -68,7 +101,7 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-       modules: ['releaseModule']
+      'modules': ['releaseModule']
     });
 
     this.app.run({}, function () {
@@ -81,6 +114,7 @@ describe('node generator', function () {
     var expected = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
+      'example/simple.js',
       '.gitignore',
       '.jshintrc',
       '.jscs.json',
@@ -98,7 +132,7 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-       modules: ['jscsModule']
+      'modules': ['jscsModule']
     });
 
     this.app.run({}, function () {

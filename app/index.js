@@ -64,7 +64,7 @@ NodeGenerator.prototype.askFor = function askFor() {
       function (g) { return g[1].toUpperCase(); }
     );
 
-    if(!props.githubUsername){
+    if(props.githubUsername){
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
     } else {
       this.repoUrl = 'user/repo';
@@ -117,6 +117,11 @@ NodeGenerator.prototype.lib = function lib() {
 NodeGenerator.prototype.test = function test() {
   this.mkdir('test');
   this.template('test/name_test.js', 'test/' + this.slugname + '_test.js');
+};
+
+NodeGenerator.prototype.example = function lib() {
+  this.mkdir('example');
+  this.template('example/simple.js', 'example/simple.js');
 };
 
 NodeGenerator.prototype.projectfiles = function projectfiles() {
