@@ -112,27 +112,30 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     this.istanbulModule = hasMod('istanbulModule');
     this.coverallsModule = true;
 
-  }.bind(this));
+    if (this.istanbulModule) {
 
-  if (this.istanbulModule) {
+      var promptCoveralls = [{
+        type: 'confirm',
+        name: 'coverallsModule',
+        message: 'Would you like add coveralls',
+        default: true
+      }];
 
-    var promptCoveralls = [{
-      type: 'confirm',
-      name: 'coverallsModule',
-      message: 'Would you like add coveralls',
-      default: true
-    }];
+      this.prompt(promptCoveralls, function (props) {
+        if (props && props.modules) {
+          this.coverallsModule = props.modules.indexOf('coverallsModule') !== -1;
+        } else {
+          this.coverallsModule = false;
+        }
+        cb();
 
-    this.prompt(promptCoveralls, function (props) {
+      }.bind(this));
 
-      this.coverallsModule = props.modules.indexOf('coverallsModule') !== -1;
+    } else {
       cb();
+    }
 
-    }.bind(this));
-
-  } else {
-    cb();
-  }
+  }.bind(this));
 
 };
 
