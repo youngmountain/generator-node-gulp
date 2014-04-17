@@ -109,8 +109,25 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
     this.istanbulModule = hasMod('istanbulModule');
+    this.coverallsModule = false;
 
-    cb();
+    if (this.istanbulModule) {
+      var prompts = [{
+        type: 'confirm',
+        name: 'coverallsModule',
+        message: 'Would you like add coveralls',
+        default: true
+      }];
+
+      this.prompt(prompts, function (props) {
+        this.coverallsModule = props.coverallsModule;
+        cb();
+      }.bind(this));
+
+    } else {
+      cb();
+    }
+
   }.bind(this));
 };
 
