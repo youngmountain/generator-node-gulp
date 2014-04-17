@@ -4,6 +4,12 @@ var util = require('util');
 var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
+var npmLatest = require('npm-latest');
+
+var defaultDependencies = [
+  {name:'lodash', description:'A utility library delivering consistency, customization, performance, & extras'},
+  {name:'q', description:'A library for promises'},
+];
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
@@ -98,15 +104,19 @@ NodeGenerator.prototype.askForModules = function askForModules() {
       name: 'release (Bump npm versions with Gulp)',
       checked: true
     }, {
-      value: 'lodashModule',
-      name: 'loDash (A utility library delivering consistency, customization, performance, & extras)',
-      checked: true
-    }, {
       value: 'istanbulModule',
       name: 'istanbul (JS code coverage tool)',
       checked: true
     }]
   }];
+
+  defaultDependencies.forEach(function(pkg) {
+    prompts[0].choices.push({
+      value: pkg.name,
+      name: util.format('%s (%s)', pkg.name, pkg.description),
+      checked: true
+    })
+  });
 
   this.prompt(prompts, function (props) {
 
@@ -117,11 +127,12 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     this.istanbulModule = hasMod('istanbulModule');
     this.coverallsModule = true;
 
-    this.dependenciesList = {};
-
-    if (hasMod('lodashModule')) {
-      this.dependenciesList["lodash"] = "2.4.1";
-    }
+    this.usedDependencies = {};
+    defaultDependencies.forEach(function( dep ) {
+      if( hasMod(dep.name) ) {
+        this.usedDependencies[dep.name] = 'latest';
+      }
+    }.bind(this));
 
     if (this.istanbulModule) {
 
@@ -165,11 +176,31 @@ NodeGenerator.prototype.example = function lib() {
   this.template('example/simple.js', 'example/simple.js');
 };
 
-NodeGenerator.prototype.dependency = function projectfiles(done) {
+NodeGenerator.prototype.getLatestVersions = function getLatestVersions() {
+  var cb = this.async();
+  var count = Object.keys(this.usedDependencies).length;
+
+  if( count === 0 ) {
+    return cb();
+  }
+
+  for( var packageName in this.usedDependencies ) {
+    npmLatest(packageName, {timeout: 1900}, function( err, result ) {
+      if( !err && result.name && result.version ) {
+        this.usedDependencies[result.name] = result.version;
+      }
+      if( !--count ) {
+        cb();
+      }
+    }.bind(this))
+  }
+};
+
+NodeGenerator.prototype.dependency = function dependency() {
 
   this.dependencies = '';
-  for (var name in this.dependenciesList) {
-    var version = this.dependenciesList[name];
+  for (var name in this.usedDependencies) {
+    var version = this.usedDependencies[name];
     this.dependencies += util.format('\n    "%s": "%s",', name, version);
   }
   if(this.dependencies.length > 0) {
