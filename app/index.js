@@ -64,7 +64,7 @@ NodeGenerator.prototype.askFor = function askFor() {
       function (g) { return g[1].toUpperCase(); }
     );
 
-    if(props.githubUsername){
+    if (props.githubUsername) {
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
     } else {
       this.repoUrl = 'user/repo';
@@ -96,18 +96,48 @@ NodeGenerator.prototype.askForModules = function askForModules() {
       value: 'releaseModule',
       name: 'release (Bump npm versions with Gulp)',
       checked: true
+    }, {
+      value: 'istanbulModule',
+      name: 'istanbul (JS code coverage tool)',
+      checked: true
     }]
   }];
 
-  this.prompt(prompts, function (props) {
-    var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
 
+  this.prompt(prompts, function (props) {
+
+    var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
+    this.istanbulModule = hasMod('istanbulModule');
+    this.coverallsModule = true;
 
-    cb();
+    if (this.istanbulModule) {
+
+      var promptCoveralls = [{
+        type: 'confirm',
+        name: 'coverallsModule',
+        message: 'Would you like add coveralls',
+        default: true
+      }];
+
+      this.prompt(promptCoveralls, function (props) {
+        if (props && props.modules) {
+          this.coverallsModule = props.modules.indexOf('coverallsModule') !== -1;
+        } else {
+          this.coverallsModule = false;
+        }
+        cb();
+
+      }.bind(this));
+
+    } else {
+      cb();
+    }
+
   }.bind(this));
-}
+
+};
 
 NodeGenerator.prototype.lib = function lib() {
   this.mkdir('lib');
@@ -129,7 +159,7 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('gitignore', '.gitignore');
   this.copy('travis.yml', '.travis.yml');
   this.copy('editorconfig', '.editorconfig');
-  if(this.jscsModule) {
+  if (this.jscsModule) {
     this.copy('jscs.json', '.jscs.json');
   }
 

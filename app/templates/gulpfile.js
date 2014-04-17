@@ -2,13 +2,15 @@
 
 var gulp   = require('gulp');
 var jshint = require('gulp-jshint');<% if (jscsModule) { %>
-var jscs = require('gulp-jscs');<% } %>
+var jscs = require('gulp-jscs');<% } %><% if (istanbulModule) { %>
+var istanbul = require('gulp-istanbul');<% } %>
 var mocha  = require('gulp-mocha');
 <% if (releaseModule) { %>var bump   = require('gulp-bump');<% } %>
 
 var paths = {
   lint: ['./gulpfile.js', './lib/**/*.js'],
-  tests: ['./test/**/*.js', '!test/{temp,temp/**}']
+  tests: ['./test/**/*.js', '!test/{temp,temp/**}']<% if (istanbulModule) { %>,
+  source: ['./lib/*.js']<% } %>
 };
 
 gulp.task('lint', function () {
@@ -16,12 +18,23 @@ gulp.task('lint', function () {
     .pipe(jshint('.jshintrc'))<% if (jscsModule) { %>
     .pipe(jscs())<% } %>
     .pipe(jshint.reporter('jshint-stylish'));
-});
+});<% if (istanbulModule) { %>
+
+gulp.task('istanbul', function (cb) {
+  gulp.src(paths.source)
+    .pipe(istanbul()) // Covering files
+    .on('end', function () {
+      gulp.src(paths.tests)
+        .pipe(mocha())
+        .pipe(istanbul.writeReports()) // Creating the reports after tests runned
+        .on('end', cb);
+    });
+});<% } else { %>
 
 gulp.task('mocha', function () {
   gulp.src(paths.tests)
     .pipe(mocha({ reporter: 'list' }));
-});<% if (releaseModule) { %>
+});<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
   var bumpType = process.env.BUMP || 'patch'; // major.minor.patch
@@ -31,5 +44,5 @@ gulp.task('bump', ['test'], function () {
     .pipe(gulp.dest('./'));
 });<% } %>
 
-gulp.task('test', ['lint', 'mocha']);
+gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'mocha'<% } %>]);
 <% if (releaseModule) { %>gulp.task('release', ['bump']);<% } %>
