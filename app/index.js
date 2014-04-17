@@ -64,7 +64,7 @@ NodeGenerator.prototype.askFor = function askFor() {
       function (g) { return g[1].toUpperCase(); }
     );
 
-    if(props.githubUsername){
+    if (props.githubUsername) {
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
     } else {
       this.repoUrl = 'user/repo';
@@ -96,6 +96,10 @@ NodeGenerator.prototype.askForModules = function askForModules() {
       value: 'releaseModule',
       name: 'release (Bump npm versions with Gulp)',
       checked: true
+    }, {
+      value: 'istanbulModule',
+      name: 'istanbul (JS code coverage tool)',
+      checked: true
     }]
   }];
 
@@ -104,10 +108,11 @@ NodeGenerator.prototype.askForModules = function askForModules() {
 
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
+    this.istanbulModule = hasMod('istanbulModule');
 
     cb();
   }.bind(this));
-}
+};
 
 NodeGenerator.prototype.lib = function lib() {
   this.mkdir('lib');
@@ -129,7 +134,7 @@ NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('gitignore', '.gitignore');
   this.copy('travis.yml', '.travis.yml');
   this.copy('editorconfig', '.editorconfig');
-  if(this.jscsModule) {
+  if (this.jscsModule) {
     this.copy('jscs.json', '.jscs.json');
   }
 
