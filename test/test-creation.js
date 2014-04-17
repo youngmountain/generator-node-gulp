@@ -175,4 +175,43 @@ describe('node generator', function () {
     });
   });
 
+  it('generator with istanbul and coveralls', function (done) {
+    var expected = [
+      'lib/mymodule.js',
+      'test/mymodule_test.js',
+      'example/simple.js',
+      '.gitignore',
+      '.jshintrc',
+      ['.travis.yml',
+        /npm run coveralls/
+      ],
+      '.editorconfig',
+      ['gulpfile.js',
+        /var istanbul = require\('gulp-istanbul'\)/,
+        /gulp.task\('istanbul'/,
+        /gulp.task\('test', ['lint', 'istanbul']\);/
+      ],
+      ['package.json',
+        /"name": "mymodule"/,
+        /"istanbul"/,
+        /"coveralls": "gulp test/],
+      'README.md'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+      'modules': ['istanbulModule', 'coverallsModule']
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
 });

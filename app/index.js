@@ -103,32 +103,37 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     }]
   }];
 
-  this.prompt(prompts, function (props) {
-    var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
 
+  this.prompt(prompts, function (props) {
+
+    var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
     this.istanbulModule = hasMod('istanbulModule');
-    this.coverallsModule = false;
-
-    if (this.istanbulModule) {
-      var prompts = [{
-        type: 'confirm',
-        name: 'coverallsModule',
-        message: 'Would you like add coveralls',
-        default: true
-      }];
-
-      this.prompt(prompts, function (props) {
-        this.coverallsModule = props.coverallsModule;
-        cb();
-      }.bind(this));
-
-    } else {
-      cb();
-    }
+    this.coverallsModule = true;
 
   }.bind(this));
+
+  if (this.istanbulModule) {
+
+    var promptCoveralls = [{
+      type: 'confirm',
+      name: 'coverallsModule',
+      message: 'Would you like add coveralls',
+      default: true
+    }];
+
+    this.prompt(promptCoveralls, function (props) {
+
+      this.coverallsModule = props.modules.indexOf('coverallsModule') !== -1;
+      cb();
+
+    }.bind(this));
+
+  } else {
+    cb();
+  }
+
 };
 
 NodeGenerator.prototype.lib = function lib() {
