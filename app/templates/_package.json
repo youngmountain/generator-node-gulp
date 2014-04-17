@@ -24,11 +24,14 @@
     "gulp-bump": "~0.1.4",<% } %><% if (jscsModule) { %>
     "gulp-jscs": "~0.3.0",<% } %>
     "gulp-jshint": "~1.4.0",
-    "gulp-mocha": "~0.4.1",
+    "gulp-mocha": "~0.4.1",<% if (istanbulModule) { %>
+    "gulp-istanbul": "~0.1.1",<% } %><% if (coverallsModule) { %>
+    "coveralls": "~2.10.0",<% } %>
     "should": "~3.1.2",
     "jshint-stylish": "~0.1.5"
   },
-  "scripts": {
+  "scripts": {<% if (coverallsModule) { %>
+    "coveralls": "gulp test && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",<% } %>
     "test": "gulp test"
   }
 }
