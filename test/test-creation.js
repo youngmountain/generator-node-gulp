@@ -143,7 +143,7 @@ describe('node generator', function () {
 
   it('generator with package lodash', function (done) {
     var expected = [
-      ['package.json', /"lodash"/],
+      ['package.json', /"lodash"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -164,7 +164,7 @@ describe('node generator', function () {
 
   it('generator with package q', function (done) {
     var expected = [
-      ['package.json', /"q"/],
+      ['package.json', /"q"/]
     ];
 
     helpers.mockPrompt(this.app, {
