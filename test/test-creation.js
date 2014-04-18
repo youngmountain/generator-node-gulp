@@ -162,7 +162,7 @@ describe('node generator', function () {
     });
   });
 
-  it.only('generator with package q', function (done) {
+  it('generator with package q', function (done) {
     var expected = [
       ['package.json', /"q"/],
     ];
