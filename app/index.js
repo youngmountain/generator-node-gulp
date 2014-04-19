@@ -1,15 +1,12 @@
 'use strict';
 
-var util = require('util');
+var fs = require('fs');
 var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
 var npmLatest = require('npm-latest');
 
-var defaultDependencies = [
-  {name:'lodash', description:'A utility library delivering consistency, customization, performance, & extras'},
-  {name:'q', description:'A library for promises'},
-];
+var configKeys = ['githubUsername', 'authorName', 'authorEmail', 'authorUrl'];
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
@@ -21,7 +18,18 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
     });
   });
 
-  this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
+  this.configPath = path.join(__dirname, '../config.json');
+  if (fs.existsSync(this.configPath)) {
+    this.config = JSON.parse(this.readFileAsString(this.configPath));
+  } else {
+    this.config = {
+      "meta": {},
+      "dependencies": [
+        {name: 'lodash', description: 'A utility library delivering consistency, customization, performance, & extras'},
+        {name: 'q', description: 'A library for promises'}
+      ]
+    }
+  }
 };
 util.inherits(NodeGenerator, yeoman.generators.NamedBase);
 
@@ -64,12 +72,35 @@ NodeGenerator.prototype.askFor = function askFor() {
 
   this.currentYear = (new Date()).getFullYear();
 
+  // Write config default values back to prompt
+  var meta = this.config.meta;
+  if(meta) {
+    prompts.forEach(function(val) {
+      if( meta[val.name] && configKeys.indexOf(val.name) != -1) {
+        val.default = meta[val.name];
+      }
+    }.bind(this));
+  }
+
   this.prompt(prompts, function (props) {
     this.slugname = this._.slugify(props.name);
     this.safeSlugname = this.slugname.replace(
       /-([a-z])/g,
       function (g) { return g[1].toUpperCase(); }
     );
+
+    // Store the entered values in the prompt
+    configKeys.forEach(function(val) {
+      if(props[val]) {
+
+        if(!this.config.meta) {
+          this.config.meta = {};
+        }
+
+        this.config.meta[val] = props[val];
+      }
+    }.bind(this));
+    this.writeFileFromString(JSON.stringify(this.config, '', 2), this.configPath);
 
     if (props.githubUsername) {
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
@@ -110,7 +141,7 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     }]
   }];
 
-  defaultDependencies.forEach(function(pkg) {
+  this.config.dependencies.forEach(function(pkg) {
     prompts[0].choices.push({
       value: pkg.name,
       name: util.format('%s (%s)', pkg.name, pkg.description),
@@ -128,7 +159,7 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     this.coverallsModule = true;
 
     this.usedDependencies = {};
-    defaultDependencies.forEach(function( dep ) {
+    this.config.dependencies.forEach(function( dep ) {
       if( hasMod(dep.name) ) {
         this.usedDependencies[dep.name] = 'latest';
       }

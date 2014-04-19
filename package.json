@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "yeoman-generator": "~0.16.0",
-    "npm-latest": "jprichardson/npm-latest"
+    "npm-latest": "~0.2.0"
   },
   "devDependencies": {
     "mocha": "*"
