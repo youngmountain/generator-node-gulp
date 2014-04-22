@@ -141,26 +141,26 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     }]
   }];
 
-  this.config.dependencies.forEach(function(pkg) {
+  this.config.dependencies.forEach(function (pkg) {
     prompts[0].choices.push({
       value: pkg.name,
       name: util.format('%s (%s)', pkg.name, pkg.description),
       checked: true
-    })
+    });
   });
 
   this.prompt(prompts, function (props) {
 
     var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
-    
+
     this.jscsModule = hasMod('jscsModule');
     this.releaseModule = hasMod('releaseModule');
     this.istanbulModule = hasMod('istanbulModule');
     this.coverallsModule = true;
 
     this.usedDependencies = {};
-    this.config.dependencies.forEach(function( dep ) {
-      if( hasMod(dep.name) ) {
+    this.config.dependencies.forEach(function (dep) {
+      if (hasMod(dep.name)) {
         this.usedDependencies[dep.name] = 'latest';
       }
     }.bind(this));
@@ -187,6 +187,41 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     } else {
       cb();
     }
+
+  }.bind(this));
+
+};
+
+NodeGenerator.prototype.askForDependencies = function askForDependencies() {
+  var cb = this.async();
+
+  var prompts = [{
+    type: 'checkbox',
+    name: 'dependencies',
+    message: 'Which dependencies would you like to include?',
+    choices: []
+  }];
+
+  this.config.dependencies.forEach(function (pkg) {
+    prompts[0].choices.push({
+      value: pkg.name,
+      name: util.format('%s (%s)', pkg.name, pkg.description),
+      checked: true
+    });
+  });
+
+  this.prompt(prompts, function (props) {
+
+    var hasMod = function (mod) { return props.dependencies.indexOf(mod) !== -1; };
+
+    this.usedDependencies = {};
+    this.config.dependencies.forEach(function (dep) {
+      if (hasMod(dep.name)) {
+        this.usedDependencies[dep.name] = 'latest';
+      }
+    }.bind(this));
+
+    cb();
 
   }.bind(this));
 

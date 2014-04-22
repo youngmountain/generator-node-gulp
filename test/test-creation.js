@@ -40,7 +40,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': []
+      'modules': [],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
@@ -71,7 +72,8 @@ describe('node generator', function () {
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
       'homepage': 'http://example.com',
-      'modules': []
+      'modules': [],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
@@ -101,7 +103,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['releaseModule']
+      'modules': ['releaseModule'],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
@@ -132,7 +135,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['jscsModule']
+      'modules': ['jscsModule'],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
@@ -153,7 +157,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['lodash']
+      'modules': [],
+      'dependencies': ['lodash']
     });
 
     this.app.run({}, function () {
@@ -174,7 +179,30 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['q']
+      'modules': [],
+      'dependencies': ['q']
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
+  it('generator with package lodash and q', function (done) {
+    var expected = [
+      ['package.json', /"lodash"/, /"q"/]
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'name': 'mymodule',
+      'description': 'awesome module',
+      'license': 'MIT',
+      'githubUsername': 'octocat',
+      'authorName': 'Octo Cat',
+      'authorEmail': 'octo@example.com',
+      'modules': [],
+      'dependencies': ['lodash', 'q']
     });
 
     this.app.run({}, function () {
@@ -208,7 +236,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['istanbulModule']
+      'modules': ['istanbulModule'],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
@@ -247,7 +276,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['istanbulModule', 'coverallsModule']
+      'modules': ['istanbulModule', 'coverallsModule'],
+      'dependencies': []
     });
 
     this.app.run({}, function () {
