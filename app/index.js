@@ -1,15 +1,13 @@
 'use strict';
 
-var fs = require('fs');
 var path = require('path');
 var util = require('util');
 var yeoman = require('yeoman-generator');
 var npmLatest = require('npm-latest');
-
-var configKeys = ['githubUsername', 'authorName', 'authorEmail', 'authorUrl'];
+var scriptBase = require('../script-base');
 
 var NodeGenerator = module.exports = function NodeGenerator(args, options) {
-  yeoman.generators.Base.apply(this, arguments);
+  scriptBase.apply(this, arguments);
 
   this.on('end', function () {
     this.installDependencies({
@@ -17,21 +15,8 @@ var NodeGenerator = module.exports = function NodeGenerator(args, options) {
       skipInstall: options['skip-install']
     });
   });
-
-  this.configPath = path.join(__dirname, '../config.json');
-  if (fs.existsSync(this.configPath)) {
-    this.config = JSON.parse(this.readFileAsString(this.configPath));
-  } else {
-    this.config = {
-      "meta": {},
-      "dependencies": [
-        {name: 'lodash', description: 'A utility library delivering consistency, customization, performance, & extras'},
-        {name: 'q', description: 'A library for promises'}
-      ]
-    }
-  }
 };
-util.inherits(NodeGenerator, yeoman.generators.NamedBase);
+util.inherits(NodeGenerator, scriptBase);
 
 NodeGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
@@ -73,14 +58,12 @@ NodeGenerator.prototype.askFor = function askFor() {
   this.currentYear = (new Date()).getFullYear();
 
   // Write config default values back to prompt
-  var meta = this.config.meta;
-  if(meta) {
-    prompts.forEach(function(val) {
-      if( meta[val.name] && configKeys.indexOf(val.name) != -1) {
-        val.default = meta[val.name];
-      }
-    }.bind(this));
-  }
+  var meta = this.config.getMeta();
+  prompts.forEach(function(val) {
+    if( meta[val.name] ) {
+      val.default = meta[val.name];
+    }
+  }.bind(this));
 
   this.prompt(prompts, function (props) {
     this.slugname = this._.slugify(props.name);
@@ -89,18 +72,7 @@ NodeGenerator.prototype.askFor = function askFor() {
       function (g) { return g[1].toUpperCase(); }
     );
 
-    // Store the entered values in the prompt
-    configKeys.forEach(function(val) {
-      if(props[val]) {
-
-        if(!this.config.meta) {
-          this.config.meta = {};
-        }
-
-        this.config.meta[val] = props[val];
-      }
-    }.bind(this));
-    this.writeFileFromString(JSON.stringify(this.config, '', 2), this.configPath);
+    this.config.setMeta(props);
 
     if (props.githubUsername) {
       this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
@@ -141,14 +113,6 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     }]
   }];
 
-  this.config.dependencies.forEach(function (pkg) {
-    prompts[0].choices.push({
-      value: pkg.name,
-      name: util.format('%s (%s)', pkg.name, pkg.description),
-      checked: true
-    });
-  });
-
   this.prompt(prompts, function (props) {
 
     var hasMod = function (mod) { return props.modules.indexOf(mod) !== -1; };
@@ -157,13 +121,6 @@ NodeGenerator.prototype.askForModules = function askForModules() {
     this.releaseModule = hasMod('releaseModule');
     this.istanbulModule = hasMod('istanbulModule');
     this.coverallsModule = true;
-
-    this.usedDependencies = {};
-    this.config.dependencies.forEach(function (dep) {
-      if (hasMod(dep.name)) {
-        this.usedDependencies[dep.name] = 'latest';
-      }
-    }.bind(this));
 
     if (this.istanbulModule) {
 
@@ -202,7 +159,8 @@ NodeGenerator.prototype.askForDependencies = function askForDependencies() {
     choices: []
   }];
 
-  this.config.dependencies.forEach(function (pkg) {
+  var dependencies = this.config.getDependencies();
+  dependencies.forEach(function (pkg) {
     prompts[0].choices.push({
       value: pkg.name,
       name: util.format('%s (%s)', pkg.name, pkg.description),
@@ -215,7 +173,7 @@ NodeGenerator.prototype.askForDependencies = function askForDependencies() {
     var hasMod = function (mod) { return props.dependencies.indexOf(mod) !== -1; };
 
     this.usedDependencies = {};
-    this.config.dependencies.forEach(function (dep) {
+    dependencies.forEach(function (dep) {
       if (hasMod(dep.name)) {
         this.usedDependencies[dep.name] = 'latest';
       }
