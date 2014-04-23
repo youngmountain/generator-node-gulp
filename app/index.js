@@ -146,8 +146,8 @@ NodeGenerator.prototype.askForModules = function askForModules() {
       }];
 
       this.prompt(promptCoveralls, function (props) {
-        if (props && props.modules) {
-          this.coverallsModule = props.modules.indexOf('coverallsModule') !== -1;
+        if (props && props.coverallsModule) {
+          this.coverallsModule = props.coverallsModule;
         } else {
           this.coverallsModule = false;
         }
