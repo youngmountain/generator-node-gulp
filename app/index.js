@@ -1,7 +1,9 @@
 'use strict';
 
-var path = require('path');
+var chalk = require('chalk');
 var util = require('util');
+var path = require('path');
+var npmName = require('npm-name');
 var yeoman = require('yeoman-generator');
 var npmLatest = require('npm-latest');
 var scriptBase = require('../script-base');
@@ -20,6 +22,7 @@ util.inherits(NodeGenerator, scriptBase);
 
 NodeGenerator.prototype.askFor = function askFor() {
   var cb = this.async();
+  var log = this.log;
 
   console.log(
     this.yeoman +
@@ -29,7 +32,18 @@ NodeGenerator.prototype.askFor = function askFor() {
   var prompts = [{
     name: 'name',
     message: 'Module Name',
-    default: path.basename(process.cwd())
+    default: path.basename(process.cwd()),
+    filter: function (input) {
+      var done = this.async();
+
+      npmName(input, function (err, available) {
+        if (!available) {
+          log.info(chalk.yellow(input) + ' already exists on npm. You might want to use another name.');
+        }
+
+        done(input);
+      });
+    }
   }, {
     name: 'description',
     message: 'Description',
@@ -68,7 +82,7 @@ NodeGenerator.prototype.askFor = function askFor() {
   this.prompt(prompts, function (props) {
     this.slugname = this._.slugify(props.name);
     this.safeSlugname = this.slugname.replace(
-      /-([a-z])/g,
+      /-([a-zA-Z])/g,
       function (g) { return g[1].toUpperCase(); }
     );
 
