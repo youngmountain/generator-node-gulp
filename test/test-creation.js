@@ -20,8 +20,8 @@ describe('node generator', function () {
   });
 
   it('creates expected files', function (done) {
-    var expected = [
-      ['lib/mymodule.js', /https:\/\/github.com\/octocat\/mymodule/],
+    var expectedFiles = [
+      'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
       '.gitignore',
@@ -29,8 +29,13 @@ describe('node generator', function () {
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
-      ['package.json', /"name": "mymodule"/],
+      'package.json',
       'README.md'
+    ];
+
+    var expectedContent = [
+      ['lib/mymodule.js', /https:\/\/github.com\/octocat\/mymodule/],
+      ['package.json', /"name": "mymodule"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -45,14 +50,15 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('creates expected files', function (done) {
-    var expected = [
-      ['lib/mymodule.js', /http:\/\/example.com/],
+    var expectedFiles = [
+      'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
       '.gitignore',
@@ -60,8 +66,13 @@ describe('node generator', function () {
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
-      ['package.json', /"name": "mymodule"/],
+      'package.json',
       'README.md'
+    ];
+
+    var expectedContent = [
+      ['lib/mymodule.js', /http:\/\/example.com/],
+      ['package.json', /"name": "mymodule"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -77,13 +88,14 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with releaseModule', function (done) {
-    var expected = [
+    var expectedFiles = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
@@ -92,8 +104,13 @@ describe('node generator', function () {
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
-      ['package.json', /"name": "mymodule"/, /"gulp-bump"/],
+      'package.json',
       'README.md'
+    ];
+
+    var expectedContent = [
+      ['package.json', /"gulp-bump"/],
+      ['package.json', /"name": "mymodule"/],
     ];
 
     helpers.mockPrompt(this.app, {
@@ -108,13 +125,14 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with jscsModule', function (done) {
-    var expected = [
+    var expectedFiles = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
@@ -124,8 +142,13 @@ describe('node generator', function () {
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
-      ['package.json', /"name": "mymodule"/, /"gulp-jscs"/],
+      'package.json',
       'README.md'
+    ];
+
+    var expectedContent = [
+      ['package.json', /"name": "mymodule"/],
+      ['package.json', /"gulp-jscs"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -140,13 +163,14 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with package lodash', function (done) {
-    var expected = [
+    var expectedContent = [
       ['package.json', /"lodash"/]
     ];
 
@@ -162,13 +186,13 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with package q', function (done) {
-    var expected = [
+    var expectedContent = [
       ['package.json', /"q"/]
     ];
 
@@ -184,14 +208,15 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with package lodash and q', function (done) {
-    var expected = [
-      ['package.json', /"lodash"/, /"q"/]
+    var expectedContent = [
+      ['package.json', /"lodash"/],
+      ['package.json', /"q"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -206,13 +231,13 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with istanbul', function (done) {
-    var expected = [
+    var expectedFiles = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
@@ -220,13 +245,16 @@ describe('node generator', function () {
       '.jshintrc',
       '.travis.yml',
       '.editorconfig',
-      ['gulpfile.js',
-        /var istanbul = require\('gulp-istanbul'\)/,
-        /gulp.task\('istanbul'/,
-        /gulp.task\('test', ['lint', 'istanbul']\);/
-      ],
-      ['package.json', /"name": "mymodule"/, /"istanbul"/],
+      'gulpfile.js',
+      'package.json',
       'README.md'
+    ];
+
+    var expectedContent = [
+      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
+      ['gulpfile.js', /gulp.task\('istanbul'/],
+      ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
+      ['package.json', /"name": "mymodule"/, /"istanbul"/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -241,32 +269,33 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
 
   it('generator with istanbul and coveralls', function (done) {
-    var expected = [
+    var expectedFiles = [
       'lib/mymodule.js',
       'test/mymodule_test.js',
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      ['.travis.yml',
-        /npm run coveralls/
-      ],
+      '.travis.yml',
       '.editorconfig',
-      ['gulpfile.js',
-        /var istanbul = require\('gulp-istanbul'\)/,
-        /gulp.task\('istanbul'/,
-        /gulp.task\('test', ['lint', 'istanbul']\);/
-      ],
-      ['package.json',
-        /"name": "mymodule"/,
-        /"istanbul"/,
-        /"coveralls": "gulp test/],
-      'README.md'
+      'gulpfile.js',
+      'README.md',
+      'package.json'
+    ];
+    var expectedContent = [
+      ['.travis.yml', /npm run coveralls/],
+      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
+      ['gulpfile.js', /gulp.task\('istanbul'/],
+      ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
+      ['package.json', /"name": "mymodule"/],
+      ['package.json', /"gulp-istanbul"/],
+      ['package.json', /"coveralls": "gulp test/]
     ];
 
     helpers.mockPrompt(this.app, {
@@ -282,7 +311,8 @@ describe('node generator', function () {
     });
 
     this.app.run({}, function () {
-      helpers.assertFiles(expected);
+      helpers.assertFile(expectedFiles);
+      helpers.assertFileContent(expectedContent);
       done();
     });
   });
