@@ -276,7 +276,8 @@ describe('node generator', function () {
       'githubUsername': 'octocat',
       'authorName': 'Octo Cat',
       'authorEmail': 'octo@example.com',
-      'modules': ['istanbulModule', 'coverallsModule'],
+      'modules': ['istanbulModule'],
+      'coverallsModule': true,
       'dependencies': []
     });
 
