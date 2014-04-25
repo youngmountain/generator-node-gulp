@@ -4,7 +4,6 @@ var chalk = require('chalk');
 var util = require('util');
 var path = require('path');
 var npmName = require('npm-name');
-var yeoman = require('yeoman-generator');
 var npmLatest = require('npm-latest');
 var scriptBase = require('../script-base');
 
