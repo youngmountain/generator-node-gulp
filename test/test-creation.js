@@ -26,11 +26,11 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
+      'gulpfile.js',
       'package.json',
-      '_README.md'
+      'README.md'
     ];
 
     var expectedContent = [
@@ -63,11 +63,11 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
+      'gulpfile.js',
       'package.json',
-      '_README.md'
+      'README.md'
     ];
 
     var expectedContent = [
@@ -101,11 +101,11 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
+      'gulpfile.js',
       'package.json',
-      '_README.md'
+      'README.md'
     ];
 
     var expectedContent = [
@@ -139,11 +139,11 @@ describe('node generator', function () {
       '.gitignore',
       '.jshintrc',
       '.jscs.json',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
+      'gulpfile.js',
       'package.json',
-      '_README.md'
+      'README.md'
     ];
 
     var expectedContent = [
@@ -243,17 +243,17 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
+      'gulpfile.js',
       'package.json',
-      '_README.md'
+      'README.md'
     ];
 
     var expectedContent = [
-      ['_gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
-      ['_gulpfile.js', /gulp.task\('istanbul'/],
-      ['_gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
+      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
+      ['gulpfile.js', /gulp.task\('istanbul'/],
+      ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
       ['package.json', /"name": "mymodule"/, /"istanbul"/]
     ];
 
@@ -282,17 +282,17 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '._travis.yml',
+      '.travis.yml',
       '.editorconfig',
-      '_gulpfile.js',
-      '_README.md',
+      'gulpfile.js',
+      'README.md',
       'package.json'
     ];
     var expectedContent = [
-      ['._travis.yml', /npm run coveralls/],
-      ['_gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
-      ['_gulpfile.js', /gulp.task\('istanbul'/],
-      ['_gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
+      ['.travis.yml', /npm run coveralls/],
+      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
+      ['gulpfile.js', /gulp.task\('istanbul'/],
+      ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
       ['package.json', /"name": "mymodule"/],
       ['package.json', /"gulp-istanbul"/],
       ['package.json', /"coveralls": "gulp test/]

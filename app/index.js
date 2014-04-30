@@ -234,14 +234,14 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
   configuring: function () {
     this.copy('jshintrc', '.jshintrc');
     this.copy('gitignore', '.gitignore');
-    this.copy('_travis.yml', '._travis.yml');
+    this.copy('_travis.yml', '.travis.yml');
     this.copy('editorconfig', '.editorconfig');
     if (this.jscsModule) {
       this.copy('jscs.json', '.jscs.json');
     }
 
-    this.template('_README.md');
-    this.template('_gulpfile.js');
+    this.template('_README.md', 'README.md');
+    this.template('_gulpfile.js', 'gulpfile.js');
     this.template('_package.json', 'package.json');
   },
 
