@@ -10,7 +10,7 @@ var Config = require('../config');
 
 var NodeGenerator = module.exports = yeoman.generators.Base.extend({
   initializing: function () {
-    this.config = new Config();
+    this.settings = new Config();
   },
 
   prompting: function () {
@@ -63,8 +63,8 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
 
     this.currentYear = (new Date()).getFullYear();
 
-    // Write config default values back to prompt
-    var meta = this.config.getMeta();
+    // Write settings default values back to prompt
+    var meta = this.settings.getMeta();
     prompts.forEach(function (val) {
       if (meta[val.name]) {
         val.default = meta[val.name];
@@ -80,7 +80,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
           }
       );
 
-      this.config.setMeta(props);
+      this.settings.setMeta(props);
 
       if (props.githubUsername) {
         this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
@@ -170,7 +170,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
       choices: []
     }];
 
-    var dependencies = this.config.getDependencies();
+    var dependencies = this.settings.getDependencies();
     dependencies.forEach(function (pkg) {
       prompts[0].choices.push({
         value: pkg.name,

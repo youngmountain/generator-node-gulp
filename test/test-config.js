@@ -5,7 +5,7 @@ var path = require('path');
 var helpers = require('yeoman-generator').test;
 var Config = require('../config');
 
-describe('generator config', function () {
+describe('generator settings', function () {
 
   beforeEach(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {

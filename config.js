@@ -12,20 +12,20 @@ var _defaultDependencies = [
 ];
 
 /**
- * The Generator config
+ * The Generator settings
  * This is used to store the generators meta and dependencies information in a persistent data source.
  * @constructor
  */
 var Config = module.exports = function Config( configPath ) {
   this._meta = {};
   this._dependencies = [];
-  this._configPath = configPath || path.join(__dirname, './config.json');
+  this._configPath = configPath || path.join(__dirname, './settings.json');
 
   this._load();
 };
 
 /**
- * Loads the meta and dependencies data from the config file
+ * Loads the meta and dependencies data from the settings file
  */
 Config.prototype._load = function _load() {
   if( fs.existsSync(this._configPath) ) {
@@ -39,7 +39,7 @@ Config.prototype._load = function _load() {
 };
 
 /**
- * Store the meta and dependencies data in the config file
+ * Store the meta and dependencies data in the settings file
  */
 Config.prototype._write = function _write() {
   var content = {
@@ -67,7 +67,7 @@ Config.prototype.getMeta = function getMeta() {
 };
 
 /**
- * Store the given metadata in the config file
+ * Store the given metadata in the settings file
  * @param {Object} Generators metadata
  */
 Config.prototype.setMeta = function storeMeta( options ) {
