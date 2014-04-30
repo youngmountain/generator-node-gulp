@@ -249,13 +249,13 @@ NodeGenerator.prototype.dependency = function dependency() {
 NodeGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('jshintrc', '.jshintrc');
   this.copy('gitignore', '.gitignore');
-  this.copy('travis.yml', '.travis.yml');
+  this.copy('_travis.yml', '._travis.yml');
   this.copy('editorconfig', '.editorconfig');
   if (this.jscsModule) {
     this.copy('jscs.json', '.jscs.json');
   }
 
-  this.template('README.md');
-  this.template('gulpfile.js');
+  this.template('_README.md');
+  this.template('_gulpfile.js');
   this.template('_package.json', 'package.json');
 };
