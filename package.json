@@ -1,28 +1,26 @@
 {
   "name": "generator-node-gulp",
-  "version": "0.3.1",
   "description": "A node generator for Yeoman",
+  "version": "0.3.1",
+  "homepage": "https://github.com/stefanbuck/generator-node-gulp",
+  "bugs": "https://github.com/stefanbuck/generator-node-gulp/issues",
+  "license": "MIT",
+  "main": "app/index.js",
+  "author": {
+    "name": "Stefan Buck",
+    "email": "code@stefanbuck.com",
+    "url": "http://stefanbuck.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanbuck/generator-node-gulp"
+  },
   "keywords": [
     "yeoman-generator",
     "scaffold",
     "node",
     "gulp"
   ],
-  "homepage": "https://github.com/stefanbuck/generator-node-gulp",
-  "bugs": "https://github.com/stefanbuck/generator-node-gulp/issues",
-  "author": {
-    "name": "Stefan Buck",
-    "email": "me@stefanbuck.com",
-    "url": "https://github.com/stefanbuck"
-  },
-  "main": "app/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/stefanbuck/generator-node-gulp.git"
-  },
-  "scripts": {
-    "test": "mocha"
-  },
   "dependencies": {
     "chalk": "~0.4.0",
     "npm-name": "~0.1.0",
@@ -30,10 +28,22 @@
     "npm-latest": "~0.2.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "gulp": "~3.5.2",
+    "gulp-bump": "~0.1.4",
+    "gulp-jscs": "~0.3.0",
+    "gulp-jshint": "~1.4.0",
+    "gulp-mocha": "~0.4.1",
+    "gulp-istanbul": "~0.1.1",
+    "coveralls": "~2.10.0",
+    "should": "~3.1.2",
+    "jshint-stylish": "~0.1.5"
   },
   "peerDependencies": {
     "yo": ">=1.0.3"
+  },
+  "scripts": {
+    "coveralls": "gulp test && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "gulp test"
   },
   "engines": {
     "node": ">= 0.10.0",
@@ -41,10 +51,5 @@
   },
   "files": [
     "app"
-  ],
-  "licenses": [
-    {
-      "type": "MIT"
-    }
   ]
 }

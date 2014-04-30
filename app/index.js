@@ -8,7 +8,7 @@ var npmLatest = require('npm-latest');
 var yeoman = require('yeoman-generator');
 var Config = require('../config');
 
-var NodeGenerator = module.exports = yeoman.generators.Base.extend({
+module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.settings = new Config();
   },
@@ -215,7 +215,7 @@ var NodeGenerator = module.exports = yeoman.generators.Base.extend({
         if (!--count) {
           cb();
         }
-      }.bind(this))
+      }.bind(this));
     }
   },
 

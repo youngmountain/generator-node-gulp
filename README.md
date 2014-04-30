@@ -1,4 +1,5 @@
-# Node Generator [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
+# Node Generator with Gulp
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > Create a Node.js module with [Yeoman](http://yeoman.io/), including gulp and Mocha unit tests
 
@@ -31,3 +32,5 @@ _Note that this template will generate files in the current directory, so be sur
 [travis-image]: https://travis-ci.org/stefanbuck/generator-node-gulp.svg?branch=master
 [daviddm-url]: https://david-dm.org/stefanbuck/generator-node-gulp.svg?theme=shields.io
 [daviddm-image]: https://david-dm.org/stefanbuck/generator-node-gulp
+[coveralls-url]: https://coveralls.io/r/stefanbuck/generator-node-gulp
+[coveralls-image]: https://coveralls.io/repos/stefanbuck/generator-node-gulp/badge.png

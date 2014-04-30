@@ -1,6 +1,5 @@
 'use strict';
 
-var util = require('util');
 var path = require('path');
 var fs = require('fs');
 
@@ -16,7 +15,7 @@ var _defaultDependencies = [
  * This is used to store the generators meta and dependencies information in a persistent data source.
  * @constructor
  */
-var Config = module.exports = function Config( configPath ) {
+var Config = module.exports = function Config(configPath) {
   this._meta = {};
   this._dependencies = [];
   this._configPath = configPath || path.join(__dirname, './settings.json');
@@ -28,7 +27,7 @@ var Config = module.exports = function Config( configPath ) {
  * Loads the meta and dependencies data from the settings file
  */
 Config.prototype._load = function _load() {
-  if( fs.existsSync(this._configPath) ) {
+  if (fs.existsSync(this._configPath)) {
     var content = fs.readFileSync(this._configPath);
     content = JSON.parse(content);
     this._meta = content.meta;
@@ -45,7 +44,7 @@ Config.prototype._write = function _write() {
   var content = {
     meta: this._meta,
     dependencies: this._dependencies,
-  }
+  };
   content = JSON.stringify(content, '', 2);
   fs.writeFileSync(this._configPath, content);
 };
@@ -68,11 +67,11 @@ Config.prototype.getMeta = function getMeta() {
 
 /**
  * Store the given metadata in the settings file
- * @param {Object} Generators metadata
+ * @return {Object} Generators metadata
  */
-Config.prototype.setMeta = function storeMeta( options ) {
-  configKeys.forEach(function( val ) {
-    if( options[val] ) {
+Config.prototype.setMeta = function storeMeta(options) {
+  configKeys.forEach(function (val) {
+    if (options[val]) {
       this._meta[val] = options[val];
     }
   }.bind(this));
