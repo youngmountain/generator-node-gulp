@@ -20,15 +20,15 @@
 <%= dependencies %>
   <% } %>},
   "devDependencies": {
-    "gulp": "~3.5.2",<% if (releaseModule) { %>
-    "gulp-bump": "~0.1.4",<% } %><% if (jscsModule) { %>
-    "gulp-jscs": "~0.3.0",<% } %>
-    "gulp-jshint": "~1.4.0",
-    "gulp-mocha": "~0.4.1",<% if (istanbulModule) { %>
-    "gulp-istanbul": "~0.1.1",<% } %><% if (coverallsModule) { %>
-    "coveralls": "~2.10.0",<% } %>
-    "should": "~3.1.2",
-    "jshint-stylish": "~0.1.5"
+    "gulp": "^3.6.2",<% if (releaseModule) { %>
+    "gulp-bump": "^0.1.8",<% } %><% if (jscsModule) { %>
+    "gulp-jscs": "^0.4.2",<% } %>
+    "gulp-jshint": "^1.5.5",
+    "gulp-mocha": "^0.4.1",<% if (istanbulModule) { %>
+    "gulp-istanbul": "^0.1.1",<% } %><% if (coverallsModule) { %>
+    "coveralls": "^2.10.0",<% } %>
+    "should": "^3.3.1",
+    "jshint-stylish": "^0.2.0"
   },
   "scripts": {<% if (coverallsModule) { %>
     "coveralls": "gulp test && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",<% } %>
