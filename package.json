@@ -1,7 +1,7 @@
 {
   "name": "generator-node-gulp",
   "description": "A node generator for Yeoman",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "homepage": "https://github.com/stefanbuck/generator-node-gulp",
   "bugs": "https://github.com/stefanbuck/generator-node-gulp/issues",
   "license": "MIT",
