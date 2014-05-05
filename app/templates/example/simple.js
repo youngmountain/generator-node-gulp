@@ -12,6 +12,6 @@
 // External libs.
 // Internal libs.
 
-var <%= safeSlugname %> = require('<%= slugname %>');
+var <%= safeSlugname %> = require('../');
 
 <%= safeSlugname %>.awesome(); // "awesome"
