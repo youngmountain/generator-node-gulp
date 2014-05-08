@@ -2,7 +2,7 @@
  * <%= props.name %>
  * <%= props.homepage %>
  *
- * Copyright (c) <%= currentYear %> <%= props.authorName %>
+ * Copyright (c) <%= currentYear %><% if (props.authorName) { %> <%= props.authorName %><% } %>
  * Licensed under the <%= props.license %> license.
  */
 

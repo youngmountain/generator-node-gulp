@@ -35,7 +35,7 @@ _(Nothing yet)_
 
 ## License
 
-Copyright (c) <%= currentYear %> <%= props.authorName %>. Licensed under the <%= props.license %> license.
+Copyright (c) <%= currentYear %><% if (props.authorName) { %> <%= props.authorName %><% } %>. Licensed under the <%= props.license %> license.
 
 
 

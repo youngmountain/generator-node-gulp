@@ -72,7 +72,7 @@ Config.prototype.getMeta = function getMeta() {
  */
 Config.prototype.setMeta = function storeMeta(options) {
   configKeys.forEach(function (val) {
-    if (options[val]) {
+    if (options[val] && options[val].trim()) {
       this._meta[val] = options[val];
     }
   }.bind(this));

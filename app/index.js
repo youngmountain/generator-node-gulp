@@ -81,12 +81,29 @@ module.exports = yeoman.generators.Base.extend({
           }
       );
 
+      if (props.homepage) {
+        props.homepage = props.homepage.trim();
+      }
+      if (props.license) {
+        props.license = props.license.trim() || 'MIT';
+      }
+      if (props.authorName) {
+        props.authorName = props.authorName.trim();
+      }
+      if (props.authorEmail) {
+        props.authorEmail = props.authorEmail.trim();
+      }
+      if (props.authorUrl) {
+        props.authorUrl = props.authorUrl.trim();
+      }
+
       this.settings.setMeta(props);
 
-      if (props.githubUsername) {
+      if (props.githubUsername && props.githubUsername.trim()) {
         this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
       } else {
         this.repoUrl = 'user/repo';
+        props.githubUsername = 'user';
       }
 
       if (!props.homepage) {
