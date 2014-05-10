@@ -36,7 +36,8 @@
     "gulp-istanbul": "^0.1.1",
     "coveralls": "^2.10.0",
     "should": "^3.3.1",
-    "jshint-stylish": "^0.2.0"
+    "jshint-stylish": "^0.2.0",
+    "lodash": "^2.4.1"
   },
   "peerDependencies": {
     "yo": ">=1.0.3"
