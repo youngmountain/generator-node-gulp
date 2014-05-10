@@ -6,11 +6,11 @@ var jscs = require('gulp-jscs');
 var istanbul = require('gulp-istanbul');
 var mocha  = require('gulp-mocha');
 var bump   = require('gulp-bump');
-var _ = require('lodash');
 
 var paths = {
   lint: ['./gulpfile.js', './app/index.js', './config.js'],
   tests: ['./test/**/*.js', '!./test/temp/**/*.js'],
+  watch: ['./gulpfile.js', './app/**', './config.js', './test/**/*.js', '!./test/temp/**/*.js'],
   source: ['./lib/*.js', './app/index.js', './config.js']
 };
 
@@ -42,7 +42,7 @@ gulp.task('bump', ['test'], function () {
 
 gulp.task('watch', function () {
   gulp.run('istanbul');
-  gulp.watch(_.union(paths.lint, paths.tests), ['istanbul']);
+  gulp.watch(paths.watch, ['istanbul']);
 });
 
 gulp.task('test', ['lint', 'istanbul']);
