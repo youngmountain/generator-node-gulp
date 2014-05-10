@@ -25,7 +25,7 @@ gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
     .pipe(istanbul()) // Covering files
     .on('end', function () {
-      gulp.src(paths.tests)
+      gulp.src(paths.tests, {cwd: __dirname})
         .pipe(mocha())
         .pipe(istanbul.writeReports()) // Creating the reports after tests runned
         .on('end', cb);
@@ -33,7 +33,7 @@ gulp.task('istanbul', function (cb) {
 });<% } else { %>
 
 gulp.task('mocha', function () {
-  gulp.src(paths.tests)
+  gulp.src(paths.tests, {cwd: __dirname})
     .pipe(mocha({ reporter: 'list' }));
 });<% } %><% if (releaseModule) { %>
 
