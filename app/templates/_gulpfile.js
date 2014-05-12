@@ -50,5 +50,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.watch, ['test']);
 });
 
+gulp.task('default', ['test']);
 gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'mocha'<% } %>]);
 <% if (releaseModule) { %>gulp.task('release', ['bump']);<% } %>
