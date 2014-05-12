@@ -6,6 +6,7 @@ var path = require('path');
 var npmName = require('npm-name');
 var npmLatest = require('npm-latest');
 var yeoman = require('yeoman-generator');
+var yosay = require('yosay');
 var Config = require('../config');
 
 module.exports = yeoman.generators.Base.extend({
@@ -17,10 +18,7 @@ module.exports = yeoman.generators.Base.extend({
     var cb = this.async();
     var log = this.log;
 
-    log(
-      this.yeoman +
-      '\nThe name of your project shouldn\'t contain "node" or "js" and' +
-      '\nshould be a unique ID not already in use at search.npmjs.org.');
+    log(yosay('Hello, and welcome to the node-gulp generator. Let\'s be awesome together!'));
 
     var prompts = [{
       name: 'name',
