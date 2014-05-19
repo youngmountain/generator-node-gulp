@@ -1,11 +1,7 @@
 'use strict';
 
 var gulp   = require('gulp');
-var jshint = require('gulp-jshint');<% if (jscsModule) { %>
-var jscs = require('gulp-jscs');<% } %><% if (istanbulModule) { %>
-var istanbul = require('gulp-istanbul');<% } %>
-var mocha  = require('gulp-mocha');
-<% if (releaseModule) { %>var bump   = require('gulp-bump');<% } %>
+var plugins = require('gulp-load-plugins')();
 
 var paths = {
   lint: ['./gulpfile.js', './lib/**/*.js'],
@@ -16,18 +12,18 @@ var paths = {
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
-    .pipe(jshint('.jshintrc'))<% if (jscsModule) { %>
-    .pipe(jscs())<% } %>
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(plugins.jshint('.jshintrc'))<% if (jscsModule) { %>
+    .pipe(plugins.jscs())<% } %>
+    .pipe(plugins.jshint.reporter('jshint-stylish'));
 });<% if (istanbulModule) { %>
 
 gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
-    .pipe(istanbul()) // Covering files
+    .pipe(plugins.istanbul()) // Covering files
     .on('end', function () {
       gulp.src(paths.tests, {cwd: __dirname})
-        .pipe(mocha())
-        .pipe(istanbul.writeReports()) // Creating the reports after tests runned
+        .pipe(plugins.mocha())
+        .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('end', cb);
     });
 });<% } else { %>
@@ -41,7 +37,7 @@ gulp.task('bump', ['test'], function () {
   var bumpType = process.env.BUMP || 'patch'; // major.minor.patch
 
   return gulp.src(['./package.json'])
-    .pipe(bump({ type: bumpType }))
+    .pipe(plugins.bump({ type: bumpType }))
     .pipe(gulp.dest('./'));
 });<% } %>
 
