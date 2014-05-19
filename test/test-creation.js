@@ -252,7 +252,6 @@ describe('node generator', function () {
 
     var expectedContent = [
       ['.gitignore', /^(?!coverage\/)/],
-      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
       ['gulpfile.js', /gulp.task\('istanbul'/],
       ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
       ['package.json', /"name": "mymodule"/, /"istanbul"/]
@@ -292,7 +291,6 @@ describe('node generator', function () {
     var expectedContent = [
       ['.travis.yml', /npm run coveralls/],
       ['.gitignore', /coverage\//],
-      ['gulpfile.js', /var istanbul = require\('gulp-istanbul'\)/],
       ['gulpfile.js', /gulp.task\('istanbul'/],
       ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
       ['package.json', /"name": "mymodule"/],
