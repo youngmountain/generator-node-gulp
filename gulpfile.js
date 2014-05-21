@@ -20,11 +20,14 @@ gulp.task('lint', function () {
 gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
     .pipe(plugins.istanbul()) // Covering files
-    .on('end', function () {
+    .on('finish', function () {
       gulp.src(paths.tests, {cwd: __dirname})
         .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
-        .on('end', cb);
+        .on('finish', function() {
+          process.chdir(__dirname);
+          cb();
+        });
     });
 });
 
