@@ -21,10 +21,13 @@ gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
-      gulp.src(paths.tests, {cwd: __dirname})
+      gulp.src(paths.tests)
         .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
-        .on('end', cb);
+        .on('finish', function() {
+          process.chdir(__dirname);
+          cb();
+        });
     });
 });<% } else { %>
 
