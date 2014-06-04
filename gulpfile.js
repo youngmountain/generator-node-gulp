@@ -22,6 +22,7 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests, {cwd: __dirname})
+        .pipe(plugins.plumber())
         .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
