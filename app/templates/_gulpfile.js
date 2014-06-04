@@ -14,6 +14,7 @@ var watching = false;
 function onError(err) {
   console.log(err.toString());
   if (watching) {
+    /*jshint validthis:true */
     this.emit('end');
   } else {
     // if you want to be really specific
