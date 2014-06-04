@@ -11,17 +11,6 @@ var paths = {
 };
 var watching = false;
 
-function onError(err) {
-  console.log(err.toString());
-  if (watching) {
-    /*jshint validthis:true */
-    this.emit('end');
-  } else {
-    // if you want to be really specific
-    process.exit(1);
-  }
-}
-
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe(plugins.jshint('.jshintrc'))<% if (jscsModule) { %>
@@ -34,7 +23,8 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-        .pipe(plugins.mocha().on('error', onError))
+        .pipe(plugins.plumber())
+        .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
           process.chdir(__dirname);
@@ -45,7 +35,8 @@ gulp.task('istanbul', function (cb) {
 
 gulp.task('mocha', function () {
   gulp.src(paths.tests, {cwd: __dirname})
-    .pipe(mocha({ reporter: 'list' }).on('error', onError));
+    .pipe(plugins.plumber())
+    .pipe(mocha({ reporter: 'list' }));
 });<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
