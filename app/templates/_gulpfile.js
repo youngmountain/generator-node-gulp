@@ -9,6 +9,17 @@ var paths = {
   tests: ['./test/**/*.js', '!test/{temp,temp/**}']<% if (istanbulModule) { %>,
   source: ['./lib/*.js']<% } %>
 };
+var watching = false;
+
+function onError(err) {
+  console.log(err.toString());
+  if (watching) {
+    this.emit('end');
+  } else {
+    // if you want to be really specific
+    process.exit(1);
+  }
+}
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
@@ -22,7 +33,7 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-        .pipe(plugins.mocha())
+        .pipe(plugins.mocha().on('error', onError))
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
           process.chdir(__dirname);
@@ -33,7 +44,7 @@ gulp.task('istanbul', function (cb) {
 
 gulp.task('mocha', function () {
   gulp.src(paths.tests, {cwd: __dirname})
-    .pipe(mocha({ reporter: 'list' }));
+    .pipe(mocha({ reporter: 'list' }).on('error', onError));
 });<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
@@ -45,6 +56,7 @@ gulp.task('bump', ['test'], function () {
 });<% } %>
 
 gulp.task('watch', function () {
+  watching = true;
   gulp.run('test');
   gulp.watch(paths.watch, ['test']);
 });
