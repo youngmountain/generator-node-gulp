@@ -9,7 +9,6 @@ var paths = {
   tests: ['./test/**/*.js', '!test/{temp,temp/**}']<% if (istanbulModule) { %>,
   source: ['./lib/*.js']<% } %>
 };
-var watching = false;
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
@@ -48,7 +47,6 @@ gulp.task('bump', ['test'], function () {
 });<% } %>
 
 gulp.task('watch', function () {
-  watching = true;
   gulp.run('test');
   gulp.watch(paths.watch, ['test']);
 });
