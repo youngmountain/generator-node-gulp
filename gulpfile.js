@@ -33,7 +33,7 @@ gulp.task('istanbul', function (cb) {
 });
 
 gulp.task('bump', ['test'], function () {
-  var bumpType = process.env.BUMP || 'patch'; // major.minor.patch
+  var bumpType = plugins.util.env.type || 'patch'; // major.minor.patch
 
   return gulp.src(['./package.json'])
     .pipe(plugins.bump({ type: bumpType }))
