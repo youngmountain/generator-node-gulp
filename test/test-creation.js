@@ -254,7 +254,8 @@ describe('node generator', function () {
       ['.gitignore', /^(?!coverage\/)/],
       ['gulpfile.js', /gulp.task\('istanbul'/],
       ['gulpfile.js', /gulp.task\('test', \['lint', 'istanbul'\]\);/],
-      ['package.json', /"name": "mymodule"/, /"istanbul"/]
+      ['package.json', /"name": "mymodule"/],
+      ['package.json', /"gulp-istanbul"/]
     ];
 
     helpers.mockPrompt(this.app, {
