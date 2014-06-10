@@ -83,7 +83,7 @@ _Note that this template will generate files in the current directory, so be sur
 
 ## Support
 
-Should you have any problems or wishes for improvements, feel free to open up an [issue](https://github.com/stefanbuck/github-linker).
+Should you have any problems or wishes for improvements, feel free to open up an [issue](https://github.com/youngmountain/generator-node-gulp/issues).
 
 
 
@@ -99,9 +99,9 @@ Should you have any problems or wishes for improvements, feel free to open up an
 
 [npm-url]: https://npmjs.org/package/generator-node-gulp
 [npm-image]: https://badge.fury.io/js/generator-node-gulp.svg
-[travis-url]: https://travis-ci.org/stefanbuck/generator-node-gulp
-[travis-image]: https://travis-ci.org/stefanbuck/generator-node-gulp.svg?branch=master
-[daviddm-url]: https://david-dm.org/stefanbuck/generator-node-gulp.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/stefanbuck/generator-node-gulp
-[coveralls-url]: https://coveralls.io/r/stefanbuck/generator-node-gulp
-[coveralls-image]: https://coveralls.io/repos/stefanbuck/generator-node-gulp/badge.png
+[travis-url]: https://travis-ci.org/youngmountain/generator-node-gulp
+[travis-image]: https://travis-ci.org/youngmountain/generator-node-gulp.svg?branch=master
+[daviddm-url]: https://david-dm.org/youngmountain/generator-node-gulp.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/youngmountain/generator-node-gulp
+[coveralls-url]: https://coveralls.io/r/youngmountain/generator-node-gulp
+[coveralls-image]: https://coveralls.io/repos/youngmountain/generator-node-gulp/badge.png
