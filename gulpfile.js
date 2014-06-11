@@ -46,5 +46,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('test', ['lint', 'istanbul']);
+
 gulp.task('release', ['bump']);
+
 gulp.task('default', ['test']);
