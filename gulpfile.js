@@ -45,6 +45,6 @@ gulp.task('watch', function () {
   gulp.watch(paths.watch, ['istanbul']);
 });
 
-gulp.task('default', ['test']);
 gulp.task('test', ['lint', 'istanbul']);
 gulp.task('release', ['bump']);
+gulp.task('default', ['test']);
