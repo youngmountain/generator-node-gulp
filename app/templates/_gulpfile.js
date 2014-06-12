@@ -46,8 +46,7 @@ gulp.task('bump', ['test'], function () {
     .pipe(gulp.dest('./'));
 });<% } %>
 
-gulp.task('watch', function () {
-  gulp.run('test');
+gulp.task('watch', ['test'], function () {
   gulp.watch(paths.watch, ['test']);
 });
 
