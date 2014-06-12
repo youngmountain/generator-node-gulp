@@ -86,6 +86,11 @@ _Note that this template will generate files in the current directory, so be sur
 Should you have any problems or wishes for improvements, feel free to open up an [issue](https://github.com/youngmountain/generator-node-gulp/issues).
 
 
+## Articles
+
+Some recommended articles for the start with node.
+- [Node.js require(s) best practices](http://www.mircozeiss.com/node-js-require-s-best-practices/)
+
 
 ## Authors
 - [Stefan Buck](https://github.com/stefanbuck)
