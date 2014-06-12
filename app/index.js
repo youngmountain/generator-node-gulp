@@ -7,11 +7,9 @@ var npmName = require('npm-name');
 var npmLatest = require('npm-latest');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
-var Config = require('../config');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
-    this.settings = new Config();
   },
 
   prompting: function () {
@@ -45,30 +43,27 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'license',
       message: 'License',
-      default: 'MIT'
+      default: 'MIT',
+      store: true
     }, {
       name: 'githubUsername',
-      message: 'GitHub username'
+      message: 'GitHub username',
+      store: true
     }, {
       name: 'authorName',
-      message: 'Author\'s Name'
+      message: 'Author\'s Name',
+      store: true
     }, {
       name: 'authorEmail',
-      message: 'Author\'s Email'
+      message: 'Author\'s Email',
+      store: true
     }, {
       name: 'authorUrl',
-      message: 'Author\'s Homepage'
+      message: 'Author\'s Homepage',
+      store: true
     }];
 
     this.currentYear = (new Date()).getFullYear();
-
-    // Write settings default values back to prompt
-    var meta = this.settings.getMeta();
-    prompts.forEach(function (val) {
-      if (meta[val.name]) {
-        val.default = meta[val.name];
-      }
-    }.bind(this));
 
     this.prompt(prompts, function (props) {
       this.slugname = this._.slugify(props.name);
@@ -95,8 +90,6 @@ module.exports = yeoman.generators.Base.extend({
         props.authorUrl = props.authorUrl.trim();
       }
 
-      this.settings.setMeta(props);
-
       if (props.githubUsername && props.githubUsername.trim()) {
         this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
       } else {
@@ -122,6 +115,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'checkbox',
       name: 'modules',
       message: 'Which modules would you like to include?',
+      store: true,
       choices: [{
           value: 'jscsModule',
           name: 'jscs (JavaScript Code Style checker)',
@@ -155,7 +149,8 @@ module.exports = yeoman.generators.Base.extend({
           type: 'confirm',
           name: 'coverallsModule',
           message: 'Would you like add coveralls',
-          default: true
+          default: true,
+          store: true
         }];
 
         this.prompt(promptCoveralls, function (props) {
@@ -183,10 +178,16 @@ module.exports = yeoman.generators.Base.extend({
       type: 'checkbox',
       name: 'dependencies',
       message: 'Which dependencies would you like to include?',
-      choices: []
+      choices: [],
+      store: true
     }];
 
-    var dependencies = this.settings.getDependencies();
+    var dependencies = [
+      {name: 'lodash', description: 'A utility library'},
+      {name: 'q', description: 'A library for promises'},
+      {name: 'debug', description: 'tiny node.js debugging utility'}
+    ];
+
     dependencies.forEach(function (pkg) {
       prompts[0].choices.push({
         value: pkg.name,
@@ -246,7 +247,7 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
-  configuring: function () {
+  copyfiles: function () {
     this.copy('jshintrc', '.jshintrc');
     this.copy('_gitignore', '.gitignore');
     this.copy('_travis.yml', '.travis.yml');
