@@ -35,7 +35,7 @@ gulp.task('istanbul', function (cb) {
 gulp.task('mocha', function () {
   gulp.src(paths.tests, {cwd: __dirname})
     .pipe(plugins.plumber())
-    .pipe(mocha({ reporter: 'list' }));
+    .pipe(plugins.mocha({ reporter: 'list' }));
 });<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
