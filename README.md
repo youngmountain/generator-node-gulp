@@ -1,4 +1,5 @@
-# Node Generator with Gulp
+![node gulp][repo-logo] 
+# node gulp
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > Based of [generator-node](https://github.com/yeoman/generator-node)
@@ -92,15 +93,16 @@ Some recommended articles for the start with node.
 - [Node.js require(s) best practices](http://www.mircozeiss.com/node-js-require-s-best-practices/)
 
 
-## Authors
+## Team
 - [Stefan Buck](https://github.com/stefanbuck)
 - [Kentaro Wakayama](https://github.com/kwakayama)
-
 
 
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+Logo by [Koji Wakayama](https://github.com/kojiwakayama)
 
 [npm-url]: https://npmjs.org/package/generator-node-gulp
 [npm-image]: https://badge.fury.io/js/generator-node-gulp.svg
@@ -110,3 +112,4 @@ Some recommended articles for the start with node.
 [daviddm-image]: https://david-dm.org/youngmountain/generator-node-gulp
 [coveralls-url]: https://coveralls.io/r/youngmountain/generator-node-gulp
 [coveralls-image]: https://coveralls.io/repos/youngmountain/generator-node-gulp/badge.png
+[repo-logo]: ./node-gulp.png
