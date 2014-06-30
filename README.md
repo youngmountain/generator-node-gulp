@@ -1,4 +1,6 @@
-![node gulp][repo-logo] 
+<p align="center">
+  <img src="node-gulp.png"/>
+</p>
 # node gulp
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image] [![Coverage Status][coveralls-image]][coveralls-url]
 
@@ -112,4 +114,3 @@ Logo by [Koji Wakayama](https://github.com/kojiwakayama)
 [daviddm-image]: https://david-dm.org/youngmountain/generator-node-gulp
 [coveralls-url]: https://coveralls.io/r/youngmountain/generator-node-gulp
 [coveralls-image]: https://coveralls.io/repos/youngmountain/generator-node-gulp/badge.png
-[repo-logo]: ./node-gulp.png
