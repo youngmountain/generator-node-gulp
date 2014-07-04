@@ -13,6 +13,7 @@ var paths = {
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe(plugins.jshint('.jshintrc'))
+    .pipe(plugins.plumber())
     .pipe(plugins.jscs())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
