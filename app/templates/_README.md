@@ -15,7 +15,7 @@ $ npm install --save <%= slugname %>
 
 ```javascript
 var <%= safeSlugname %> = require('<%= slugname %>');
-<%= safeSlugname %>.awesome(); // "awesome"
+<%= safeSlugname %>(); // "awesome"
 ```
 
 ## API
