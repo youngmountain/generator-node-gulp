@@ -6,8 +6,8 @@ var assert = require('should');<% } %>
 describe('<%= safeSlugname %>', function () {
 
   it('should be awesome', function () {<% if (testFramework === 'jasmine') { %>
-    expect(<%= safeSlugname %>.awesome()).toEqual('awesome');<% } %><% if (testFramework === 'mocha') { %>
-    <%= safeSlugname %>.awesome().should.equal('awesome');<% } %>
+    expect(<%= safeSlugname %>()).toEqual('awesome');<% } %><% if (testFramework === 'mocha') { %>
+    <%= safeSlugname %>().should.equal('awesome');<% } %>
   });
 
 });
