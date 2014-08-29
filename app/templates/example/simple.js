@@ -10,4 +10,10 @@
 
 var <%= safeSlugname %> = require('../');
 
+<<<<<<< HEAD
+console.log(<%= safeSlugname %>.awesome()); // "awesome"
+||||||| merged common ancestors
+<%= safeSlugname %>.awesome(); // "awesome"
+=======
 <%= safeSlugname %>(); // "awesome"
+>>>>>>> master
