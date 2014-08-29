@@ -33,6 +33,7 @@ Install the generator by running: `npm install -g generator-node-gulp`.
 - Optional – Measuring code coverage with [gulp-istanbul](https://github.com/SBoudrias/gulp-istanbul)
 - Optional – Upload LCOV data to [coveralls.io](http://coveralls.io) with [coveralls](https://github.com/cainus/node-coveralls)
 - Optional – Bump npm versions with [gulp-bump](https://github.com/stevelacy/gulp-bump)
+- Optional - Jasmine Unit Testing with [gulp-jasmine](https://github.com/sindresorhus/gulp-jasmine)
 
 ### dependencies
 
