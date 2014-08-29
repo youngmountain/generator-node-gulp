@@ -23,8 +23,9 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-        .pipe(plugins.plumber())
-        .pipe(plugins.mocha())
+        .pipe(plugins.plumber())<% if (testFramework === 'jasmine') { %>
+        .pipe(plugins.jasmine())<% } %><% if (testFramework === 'mocha') { %>
+        .pipe(plugins.mocha())<% } %>
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
           process.chdir(__dirname);
@@ -33,10 +34,11 @@ gulp.task('istanbul', function (cb) {
     });
 });<% } else { %>
 
-gulp.task('mocha', function () {
+gulp.task('unitTest', function () {
   gulp.src(paths.tests, {cwd: __dirname})
-    .pipe(plugins.plumber())
-    .pipe(plugins.mocha({ reporter: 'list' }));
+    .pipe(plugins.plumber())<% if (testFramework === 'jasmine') { %>
+    .pipe(plugins.jasmine());<% } %><% if (testFramework === 'mocha') { %>
+    .pipe(plugins.mocha({ reporter: 'list' }));<% } %>
 });<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
@@ -56,3 +58,6 @@ gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'m
 gulp.task('release', ['bump']);<% } %>
 
 gulp.task('default', ['test']);
+
+gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'unitTest'<% } %>]);
+<% if (releaseModule) { %>gulp.task('release', ['bump']);<% } %>

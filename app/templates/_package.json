@@ -24,11 +24,12 @@
     "gulp-util": "2.2.16",
     "gulp-bump": "^0.1.8",<% } %><% if (jscsModule) { %>
     "gulp-jscs": "^0.4.2",<% } %>
-    "gulp-jshint": "^1.5.5",
-    "gulp-mocha": "^0.4.1",<% if (istanbulModule) { %>
+    "gulp-jshint": "^1.5.5",<% if (testFramework === 'mocha') { %>
+    "gulp-mocha": "^0.4.1",<% } %><% if (testFramework === 'jasmine') { %>
+    "gulp-jasmine": "^1.0.0",<% } %><% if (istanbulModule) { %>
     "gulp-istanbul": "^0.2.0",<% } %><% if (coverallsModule) { %>
-    "coveralls": "^2.10.0",<% } %>
-    "should": "^3.3.1",
+    "coveralls": "^2.10.0",<% } %><% if (testFramework === 'mocha') { %>
+    "should": "^3.3.1",<% } %>
     "jshint-stylish": "^0.2.0",
     "gulp-load-plugins": "^0.5.1",
     "gulp-plumber": "^0.6.2"
