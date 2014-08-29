@@ -1,12 +1,12 @@
 'use strict';
 
-var <%= safeSlugname %> = require('../lib/<%= slugname %>.js');
+var <%= safeSlugname %> = require('../');
 var assert = require('should');
 
 describe('<%= safeSlugname %>', function () {
 
   it('should be awesome', function () {
-    <%= safeSlugname %>.awesome().should.equal('awesome');
+    <%= safeSlugname %>().should.equal('awesome');
   });
 
 });

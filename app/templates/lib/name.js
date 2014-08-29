@@ -8,6 +8,6 @@
 
 'use strict';
 
-exports.awesome = function() {
+module.exports = function() {
   return 'awesome';
 };
