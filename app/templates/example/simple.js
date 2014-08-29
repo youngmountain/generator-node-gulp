@@ -10,4 +10,4 @@
 
 var <%= safeSlugname %> = require('../');
 
-<%= safeSlugname %>(); // "awesome"
+console.log(<%= safeSlugname %>()); // "awesome"
