@@ -12,6 +12,7 @@ var Config = require('../config');
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
     this.settings = new Config();
+    this.testFramework = this.options['test-framework'] || 'mocha';
   },
 
   prompting: function () {
