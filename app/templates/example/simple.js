@@ -8,18 +8,12 @@
 
 'use strict';
 
-// Following the 'Node.js require(s) best practices' by
-// http://www.mircozeiss.com/node-js-require-s-best-practices/
-
-// // Nodejs libs
-// var fs = require('fs'),
-//
-// // External libs
-// debug = require('debug'),
-//
-// // Internal libs
-// data = require('./data.js');
-
 var <%= safeSlugname %> = require('../');
 
+<<<<<<< HEAD
 console.log(<%= safeSlugname %>.awesome()); // "awesome"
+||||||| merged common ancestors
+<%= safeSlugname %>.awesome(); // "awesome"
+=======
+<%= safeSlugname %>(); // "awesome"
+>>>>>>> master

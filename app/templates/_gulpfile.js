@@ -13,6 +13,7 @@ var paths = {
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe(plugins.jshint('.jshintrc'))<% if (jscsModule) { %>
+    .pipe(plugins.plumber())
     .pipe(plugins.jscs())<% } %>
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });<% if (istanbulModule) { %>
@@ -48,11 +49,15 @@ gulp.task('bump', ['test'], function () {
     .pipe(gulp.dest('./'));
 });<% } %>
 
-gulp.task('watch', function () {
-  gulp.run('test');
+gulp.task('watch', ['test'], function () {
   gulp.watch(paths.watch, ['test']);
 });
 
+gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'mocha'<% } %>]);<% if (releaseModule) { %>
+
+gulp.task('release', ['bump']);<% } %>
+
 gulp.task('default', ['test']);
+
 gulp.task('test', ['lint', <% if (istanbulModule) { %>'istanbul'<% } else { %>'unitTest'<% } %>]);
 <% if (releaseModule) { %>gulp.task('release', ['bump']);<% } %>

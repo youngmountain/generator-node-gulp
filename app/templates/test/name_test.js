@@ -1,6 +1,6 @@
 'use strict';
 
-var <%= safeSlugname %> = require('../lib/<%= slugname %>.js');<% if (testFramework === 'mocha') { %>
+var <%= safeSlugname %> = require('../');<% if (testFramework === 'mocha') { %>
 var assert = require('should');<% } %>
 
 describe('<%= safeSlugname %>', function () {
