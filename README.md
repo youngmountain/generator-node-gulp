@@ -14,8 +14,18 @@ This generator creates a new Node.js module, generating all the boilerplate you 
 
 Install the generator by running: `npm install -g generator-node-gulp`.
 
+## Options
 
+* `--test-framework=[framework]`
 
+  Defaults to `mocha`. Can be switched for
+  another supported testing framework like `jasmine`.
+
+* `--skip-install`
+
+  Skips the automatic execution of `bower` and `npm` after
+  scaffolding has finished.
+  
 ## Features
 
 - Customize dependencies prompt by editing the ```settings.json``` file [see](#dependencies).
@@ -99,6 +109,7 @@ Some recommended articles for the start with node.
 ## Team
 - [Stefan Buck](https://github.com/stefanbuck)
 - [Kentaro Wakayama](https://github.com/kwakayama)
+- [Koji Wakayama](https://github.com/kojiwakayama)
 
 
 ## License
