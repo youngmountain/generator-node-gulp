@@ -4,7 +4,7 @@
 # node gulp
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image] [![Coverage Status][coveralls-image]][coveralls-url]
 
-> Based of [generator-node](https://github.com/yeoman/generator-node)
+> Based on [generator-node](https://github.com/yeoman/generator-node)
 
 This generator creates a new Node.js module, generating all the boilerplate you need to get started with best-of-breed from the gulp ecosystem. The generator also optionally installs additional gulp plugins, see the list below.
 
@@ -29,7 +29,7 @@ Install the generator by running: `npm install -g generator-node-gulp`.
 ## Features
 
 - Customize the dependencies prompt by editing the ```settings.json``` file [see](#dependencies).
-- Prefill prompts with the last used values for
+- Prefills prompt with the last used values for
   - GitHub username
   - Author's Name
   - Author's Email
