@@ -6,7 +6,7 @@
 
 > Based of [generator-node](https://github.com/yeoman/generator-node)
 
-This generator creates a new Node.js module, generating all the boilerplate you need to get started with best-of-breed form the gulp ecosystem. The generator also optionally installs additional gulp plugins, ee the list below.
+This generator creates a new Node.js module, generating all the boilerplate you need to get started with best-of-breed from the gulp ecosystem. The generator also optionally installs additional gulp plugins, see the list below.
 
 
 
@@ -18,7 +18,7 @@ Install the generator by running: `npm install -g generator-node-gulp`.
 
 * `--test-framework=[framework]`
 
-  Defaults to `mocha`. Can be switched for
+  Defaults to `mocha`. Can be switched to
   another supported testing framework like `jasmine`.
 
 * `--skip-install`
@@ -28,8 +28,8 @@ Install the generator by running: `npm install -g generator-node-gulp`.
   
 ## Features
 
-- Customize dependencies prompt by editing the ```settings.json``` file [see](#dependencies).
-- Prefill prompt with the last used values for
+- Customize the dependencies prompt by editing the ```settings.json``` file [see](#dependencies).
+- Prefill prompts with the last used values for
   - GitHub username
   - Author's Name
   - Author's Email
@@ -47,7 +47,7 @@ Install the generator by running: `npm install -g generator-node-gulp`.
 
 ### dependencies
 
-You can customize the dependencies prompt with your preferred one by editing the ```settings.json```. The file is located in the root of the generator-node-gulp ```/usr/local/lib/node_modules/generator-node-gulp/```.
+You can customize the dependencies prompt by editing the ```settings.json```. The file is located in the root of the generator-node-gulp ```/usr/local/lib/node_modules/generator-node-gulp/```.
 
 - [debug](https://github.com/visionmedia/debug)
 - [Lo-Dash](http://lodash.com/)
@@ -97,12 +97,12 @@ _Note that this template will generate files in the current directory, so be sur
 
 ## Support
 
-Should you have any problems or wishes for improvements, feel free to open up an [issue](https://github.com/youngmountain/generator-node-gulp/issues).
+Should you have any problems or wishes for improvements, feel free to open an [issue](https://github.com/youngmountain/generator-node-gulp/issues).
 
 
 ## Articles
 
-Some recommended articles for the start with node.
+Some recommended articles to get you started with node.
 - [Node.js require(s) best practices](http://www.mircozeiss.com/node-js-require-s-best-practices/)
 
 
