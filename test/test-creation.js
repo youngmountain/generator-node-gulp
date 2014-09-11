@@ -30,7 +30,8 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'CHANGELOG.md'
     ];
 
     var expectedContent = [
@@ -67,7 +68,8 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'CHANGELOG.md'
     ];
 
     var expectedContent = [
@@ -105,7 +107,8 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'CHANGELOG.md'
     ];
 
     var expectedContent = [
@@ -143,7 +146,8 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'CHANGELOG.md'
     ];
 
     var expectedContent = [
@@ -247,7 +251,8 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'CHANGELOG.md'
     ];
 
     var expectedContent = [
@@ -287,6 +292,7 @@ describe('node generator', function () {
       '.editorconfig',
       'gulpfile.js',
       'README.md',
+      'CHANGELOG.md',
       'package.json'
     ];
     var expectedContent = [

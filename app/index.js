@@ -61,7 +61,8 @@ module.exports = yeoman.generators.Base.extend({
       message: 'Author\'s Homepage'
     }];
 
-    this.currentYear = (new Date()).getFullYear();
+    this.currentYear = new Date().getFullYear();
+    this.currentDate = new Date().toISOString().slice(0,10); // YYY-MM-DD
 
     // Write settings default values back to prompt
     var meta = this.settings.getMeta();
@@ -257,6 +258,7 @@ module.exports = yeoman.generators.Base.extend({
     }
 
     this.template('_README.md', 'README.md');
+    this.template('_CHANGELOG.md', 'CHANGELOG.md');
     this.template('_gulpfile.js', 'gulpfile.js');
     this.template('_package.json', 'package.json');
   },
