@@ -28,11 +28,6 @@ _(Coming soon)_
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [gulp](http://gulpjs.com/).
 
 
-## Release History
-
-_(Nothing yet)_
-
-
 ## License
 
 Copyright (c) <%= currentYear %><% if (props.authorName) { %> <%= props.authorName %><% } %>. Licensed under the <%= props.license %> license.
