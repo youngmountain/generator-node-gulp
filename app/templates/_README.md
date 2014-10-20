@@ -1,5 +1,5 @@
 # <%= props.name %> 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]<% if (coverallsModule) { %> [![Coverage Status][coveralls-image]][coveralls-url]<% } %>
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]<% if (coverallsModule) { %> [![Coverage Status][coveralls-image]][coveralls-url]<% } %>
 
 <%= props.description %>
 
@@ -38,7 +38,7 @@ Copyright (c) <%= currentYear %><% if (props.authorName) { %> <%= props.authorNa
 [npm-image]: https://badge.fury.io/js/<%= slugname %>.svg
 [travis-url]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>
 [travis-image]: https://travis-ci.org/<%= props.githubUsername %>/<%= slugname %>.svg?branch=master
-[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %><% if (coverallsModule) { %>
+[daviddm-url]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %><% if (coverallsModule) { %>
+[daviddm-image]: https://david-dm.org/<%= props.githubUsername %>/<%= slugname %>.svg?theme=shields.io
 [coveralls-url]: https://coveralls.io/r/<%= props.githubUsername %>/<%= slugname %>
 [coveralls-image]: https://coveralls.io/repos/<%= props.githubUsername %>/<%= slugname %>/badge.png<% } %>

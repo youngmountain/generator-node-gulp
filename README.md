@@ -2,7 +2,7 @@
   <img src="node-gulp.png"/>
 </p>
 # node gulp
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image] [![Coverage Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
 > Based on [generator-node](https://github.com/yeoman/generator-node)
 
@@ -122,7 +122,7 @@ Logo by [Koji Wakayama](https://github.com/kojiwakayama)
 [npm-image]: https://badge.fury.io/js/generator-node-gulp.svg
 [travis-url]: https://travis-ci.org/youngmountain/generator-node-gulp
 [travis-image]: https://travis-ci.org/youngmountain/generator-node-gulp.svg?branch=master
-[daviddm-url]: https://david-dm.org/youngmountain/generator-node-gulp.svg?theme=shields.io
-[daviddm-image]: https://david-dm.org/youngmountain/generator-node-gulp
+[daviddm-url]: https://david-dm.org/youngmountain/generator-node-gulp
+[daviddm-image]: https://david-dm.org/youngmountain/generator-node-gulp.svg?theme=shields.io
 [coveralls-url]: https://coveralls.io/r/youngmountain/generator-node-gulp
 [coveralls-image]: https://coveralls.io/repos/youngmountain/generator-node-gulp/badge.png
