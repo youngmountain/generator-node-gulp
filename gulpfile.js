@@ -10,10 +10,20 @@ var paths = {
   source: ['./lib/*.js', './app/index.js', './config.js']
 };
 
+var onError = function(err) {
+  plugins.util.beep();
+
+  if (process.env.CI) {
+    throw new Error(err);
+  }
+};
+
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe(plugins.jshint('.jshintrc'))
-    .pipe(plugins.plumber())
+    .pipe(plugins.plumber({
+      errorHandler: onError
+    }))
     .pipe(plugins.jscs())
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });
@@ -23,7 +33,9 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests, {cwd: __dirname})
-        .pipe(plugins.plumber())
+        .pipe(plugins.plumber({
+          errorHandler: onError
+        }))
         .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
