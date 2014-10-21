@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp   = require('gulp');
-var plugins = require('gulp-load-plugins')();
+var $ = require('gulp-load-plugins')();
 
 var paths = {
   lint: ['./gulpfile.js', './lib/**/*.js'],
@@ -11,7 +11,7 @@ var paths = {
 };
 
 var onError = function(err) {
-  plugins.util.beep();
+  $.util.beep();
 
   if (process.env.CI) {
     throw new Error(err);
@@ -20,25 +20,25 @@ var onError = function(err) {
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
-    .pipe(plugins.jshint('.jshintrc'))<% if (jscsModule) { %>
-    .pipe(plugins.plumber({
+    .pipe($.jshint('.jshintrc'))<% if (jscsModule) { %>
+    .pipe($.plumber({
       errorHandler: onError
     }))
-    .pipe(plugins.jscs())<% } %>
-    .pipe(plugins.jshint.reporter('jshint-stylish'));
+    .pipe($.jscs())<% } %>
+    .pipe($.jshint.reporter('jshint-stylish'));
 });<% if (istanbulModule) { %>
 
 gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
-    .pipe(plugins.istanbul()) // Covering files
+    .pipe($.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-        .pipe(plugins.plumber({
+        .pipe($.plumber({
           errorHandler: onError
         }))<% if (testFramework === 'jasmine') { %>
-        .pipe(plugins.jasmine())<% } %><% if (testFramework === 'mocha') { %>
-        .pipe(plugins.mocha())<% } %>
-        .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
+        .pipe($.jasmine())<% } %><% if (testFramework === 'mocha') { %>
+        .pipe($.mocha())<% } %>
+        .pipe($.istanbul.writeReports()) // Creating the reports after tests runned
         .on('finish', function() {
           process.chdir(__dirname);
           cb();
@@ -48,18 +48,18 @@ gulp.task('istanbul', function (cb) {
 
 gulp.task('unitTest', function () {
   gulp.src(paths.tests, {cwd: __dirname})
-    .pipe(plugins.plumber({
+    .pipe($.plumber({
       errorHandler: onError
     }))<% if (testFramework === 'jasmine') { %>
-    .pipe(plugins.jasmine());<% } %><% if (testFramework === 'mocha') { %>
-    .pipe(plugins.mocha({ reporter: 'list' }));<% } %>
+    .pipe($.jasmine());<% } %><% if (testFramework === 'mocha') { %>
+    .pipe($.mocha({ reporter: 'list' }));<% } %>
 });<% } %><% if (releaseModule) { %>
 
 gulp.task('bump', ['test'], function () {
-  var bumpType = plugins.util.env.type || 'patch'; // major.minor.patch
+  var bumpType = $.util.env.type || 'patch'; // major.minor.patch
 
   return gulp.src(['./package.json'])
-    .pipe(plugins.bump({ type: bumpType }))
+    .pipe($.bump({ type: bumpType }))
     .pipe(gulp.dest('./'));
 });<% } %>
 
