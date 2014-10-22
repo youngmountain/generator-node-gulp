@@ -55,6 +55,7 @@
   },
   "files": [
     "app",
-    "config.js"
+    "config.js",
+    "LICENSE"
   ]
 }
