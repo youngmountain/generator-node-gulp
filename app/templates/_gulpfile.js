@@ -10,20 +10,18 @@ var paths = {
   source: ['./lib/*.js']<% } %>
 };
 
-var onError = function(err) {
-  plugins.util.beep();
+var plumberConf = {};
 
-  if (process.env.CI) {
-    throw new Error(err);
+if (process.env.CI) {
+  plumberConf.errorHandler = function(err) {
+    throw err;
   };
-}
+};
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
     .pipe(plugins.jshint('.jshintrc'))<% if (jscsModule) { %>
-    .pipe(plugins.plumber({
-      errorHandler: onError
-    }))
+    .pipe(plugins.plumber(plumberConf))
     .pipe(plugins.jscs())<% } %>
     .pipe(plugins.jshint.reporter('jshint-stylish'));
 });<% if (istanbulModule) { %>
@@ -48,9 +46,7 @@ gulp.task('istanbul', function (cb) {
 
 gulp.task('unitTest', function () {
   gulp.src(paths.tests, {cwd: __dirname})
-    .pipe(plugins.plumber({
-      errorHandler: onError
-    }))<% if (testFramework === 'jasmine') { %>
+    .pipe(plugins.plumber(plumberConf))<% if (testFramework === 'jasmine') { %>
     .pipe(plugins.jasmine());<% } %><% if (testFramework === 'mocha') { %>
     .pipe(plugins.mocha({ reporter: 'list' }));<% } %>
 });<% } %><% if (releaseModule) { %>
