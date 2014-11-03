@@ -16,7 +16,7 @@ if (process.env.CI) {
   plumberConf.errorHandler = function(err) {
     throw err;
   };
-};
+}
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
