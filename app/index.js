@@ -7,11 +7,9 @@ var npmName = require('npm-name');
 var npmLatest = require('npm-latest');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
-var Config = require('../config');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
-    this.settings = new Config();
     this.testFramework = this.options['test-framework'] || 'mocha';
   },
 
@@ -46,31 +44,28 @@ module.exports = yeoman.generators.Base.extend({
     }, {
       name: 'license',
       message: 'License',
-      default: 'MIT'
+      default: 'MIT',
+      store: true
     }, {
       name: 'githubUsername',
-      message: 'GitHub username'
+      message: 'GitHub username',
+      store: true
     }, {
       name: 'authorName',
-      message: 'Author\'s Name'
+      message: 'Author\'s Name',
+      store: true
     }, {
       name: 'authorEmail',
-      message: 'Author\'s Email'
+      message: 'Author\'s Email',
+      store: true
     }, {
       name: 'authorUrl',
-      message: 'Author\'s Homepage'
+      message: 'Author\'s Homepage',
+      store: true
     }];
 
     this.currentYear = new Date().getFullYear();
     this.currentDate = new Date().toISOString().slice(0,10); // YYY-MM-DD
-
-    // Write settings default values back to prompt
-    var meta = this.settings.getMeta();
-    prompts.forEach(function (val) {
-      if (meta[val.name]) {
-        val.default = meta[val.name];
-      }
-    }.bind(this));
 
     this.prompt(prompts, function (props) {
       this.slugname = this._.slugify(props.name);
@@ -97,8 +92,6 @@ module.exports = yeoman.generators.Base.extend({
         props.authorUrl = props.authorUrl.trim();
       }
 
-      this.settings.setMeta(props);
-
       if (props.githubUsername && props.githubUsername.trim()) {
         this.repoUrl = 'https://github.com/' + props.githubUsername + '/' + this.slugname;
       } else {
@@ -120,25 +113,27 @@ module.exports = yeoman.generators.Base.extend({
   askForModules: function () {
     var cb = this.async();
 
+    var dependencies = [
+      {name: 'jscsModule', description: 'jscs (JavaScript Code Style checker)'},
+      {name: 'releaseModule', description: 'release (Bump npm versions with Gulp)'},
+      {name: 'istanbulModule', description: 'istanbul (JS code coverage tool)'}
+    ];
+
     var prompts = [{
       type: 'checkbox',
       name: 'modules',
       message: 'Which modules would you like to include?',
-      choices: [{
-          value: 'jscsModule',
-          name: 'jscs (JavaScript Code Style checker)',
-          checked: true
-        }, {
-          value: 'releaseModule',
-          name: 'release (Bump npm versions with Gulp)',
-          checked: true
-        }, {
-          value: 'istanbulModule',
-          name: 'istanbul (JS code coverage tool)',
-          checked: true
-        }
-      ]
+      choices: [],
+      store: true
     }];
+
+    dependencies.forEach(function (pkg) {
+      prompts[0].choices.push({
+        value: pkg.name,
+        name: pkg.description,
+        checked: true
+      });
+    });
 
     this.prompt(prompts, function (props) {
 
@@ -157,7 +152,8 @@ module.exports = yeoman.generators.Base.extend({
           type: 'confirm',
           name: 'coverallsModule',
           message: 'Would you like add coveralls',
-          default: true
+          default: true,
+          store: true
         }];
 
         this.prompt(promptCoveralls, function (props) {
@@ -181,14 +177,20 @@ module.exports = yeoman.generators.Base.extend({
   askForDependencies: function () {
     var cb = this.async();
 
+    var dependencies = [
+      {name: 'lodash', description: 'A utility library'},
+      {name: 'q', description: 'A library for promises'},
+      {name: 'debug', description: 'tiny node.js debugging utility'}
+    ];
+
     var prompts = [{
       type: 'checkbox',
       name: 'dependencies',
       message: 'Which dependencies would you like to include?',
-      choices: []
+      choices: [],
+      store: true
     }];
 
-    var dependencies = this.settings.getDependencies();
     dependencies.forEach(function (pkg) {
       prompts[0].choices.push({
         value: pkg.name,
