@@ -16,7 +16,7 @@ if (process.env.CI) {
   plumberConf.errorHandler = function(err) {
     throw err;
   };
-};
+}
 
 gulp.task('lint', function () {
   return gulp.src(paths.lint)
@@ -31,9 +31,7 @@ gulp.task('istanbul', function (cb) {
     .pipe(plugins.istanbul()) // Covering files
     .on('finish', function () {
       gulp.src(paths.tests)
-        .pipe(plugins.plumber({
-          errorHandler: onError
-        }))<% if (testFramework === 'jasmine') { %>
+        .pipe(plugins.plumber(plumberConf))<% if (testFramework === 'jasmine') { %>
         .pipe(plugins.jasmine())<% } %><% if (testFramework === 'mocha') { %>
         .pipe(plugins.mocha())<% } %>
         .pipe(plugins.istanbul.writeReports()) // Creating the reports after tests runned
