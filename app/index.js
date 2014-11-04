@@ -254,7 +254,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('_travis.yml', '.travis.yml');
     this.copy('editorconfig', '.editorconfig');
     if (this.jscsModule) {
-      this.copy('jscs.json', '.jscs.json');
+      this.copy('.jscsrc', '.jscsrc');
     }
 
     this.template('_README.md', 'README.md');

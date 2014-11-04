@@ -141,7 +141,7 @@ describe('node generator', function () {
       'example/simple.js',
       '.gitignore',
       '.jshintrc',
-      '.jscs.json',
+      '.jscsrc',
       '.travis.yml',
       '.editorconfig',
       'gulpfile.js',
