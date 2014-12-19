@@ -29,6 +29,7 @@ gulp.task('lint', function () {
 gulp.task('istanbul', function (cb) {
   gulp.src(paths.source)
     .pipe(plugins.istanbul()) // Covering files
+    .pipe(plugins.istanbul.hookRequire()) // Force `require` to return covered files
     .on('finish', function () {
       gulp.src(paths.tests, {cwd: __dirname})
         .pipe(plugins.plumber(plumberConf))
